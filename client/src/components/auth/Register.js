@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { withRouter	} from 'react-router-dom';
 import classnames from 'classnames';
 import {connect} from 'react-redux';
 import {registerUser} from "../../actions/authActions";
@@ -17,6 +18,17 @@ class Register extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+	componentDidMount() {
+		if (this.props.auth.isAuthenticated) {
+			this.props.history.push('/dashboard');
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({errors: nextProps.errors});
+		}
+	}
 
 	onChange(e) {
 		this.setState({[e.target.name]: e.target.value});
@@ -32,18 +44,16 @@ class Register extends Component {
 			password2: this.state.password2
 		};
 
-		this.props.registerUser(newUser);
+		this.props.registerUser(newUser, this.props.history);
 
 	}
 
 	render() {
 		const {errors} = this.state;
 
-		const {user} = this.props.auth;
-
 		return (
 				<div className="register">
-					{user ? "user" : "no user"}
+					{errors ? errors.name : "yse vporieadke"}
 					<div className="container">
 						<div className="row">
 							<div className="col-md-8 m-auto">
@@ -74,7 +84,7 @@ class Register extends Component {
 													 value={this.state.email}
 													 onChange={this.onChange}/>
 										{errors.email &&
-										(<div className="invalid-feedback">{errors.email}</div>)
+										(<div className="invalid-feedback">error email: {errors.email}</div>)
 										}
 										<small className="form-text text-muted">This site uses Gravatar so if you want a
 											profile image, use a Gravatar email
@@ -118,7 +128,8 @@ class Register extends Component {
 
 Register.propTypes = {
 	registerUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired
+	auth: PropTypes.object.isRequired,
+	errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -126,4 +137,4 @@ const mapStateToProps = (state) => ({
 	errors: state.errors
 });
 
-export default connect(mapStateToProps, {registerUser})(Register);
+export default connect(mapStateToProps, {registerUser})(withRouter(Register));
