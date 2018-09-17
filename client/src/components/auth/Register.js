@@ -34,9 +34,6 @@ class Register extends Component {
 
 		this.props.registerUser(newUser);
 
-		// axios.post('/api/users/register', newUser)
-		// 		.then(res => console.log(res.data))
-		// 		.catch(err => this.setState({errors: err.response.data}));
 	}
 
 	render() {
@@ -46,7 +43,7 @@ class Register extends Component {
 
 		return (
 				<div className="register">
-					{user ? user.name : null}
+					{user ? "user" : "no user"}
 					<div className="container">
 						<div className="row">
 							<div className="col-md-8 m-auto">
