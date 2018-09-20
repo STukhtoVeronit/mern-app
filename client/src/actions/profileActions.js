@@ -83,6 +83,17 @@ export const getProfiles = () => dispatch => {
 			}))
 };
 
+// export const getProfiles = function*() {
+// 	try {
+// 		const response = yield call(()=>axios.get('/api/profile/all'));
+// 		yield put({type: "GET_PROFILES", payload: response.data});
+// 	} catch (e) {
+// 		// TODO
+// 	}
+//
+// };
+
+
 export const addExperience = (expData, history) => dispatch => {
 	axios
 			.post('/api/profile/experience', expData)

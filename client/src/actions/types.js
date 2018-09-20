@@ -13,3 +13,5 @@ export const DELETE_POST = 'DELETE_POST';
 export const POST_LOADING = 'POSTS_LOADING';
 export const ADD_POST = 'ADD_POST';
 export const CLEAR_CURRENT_POST = 'CLEAR_CURRENT_POST';
+
+export const CLEAR_ERROR = 'CLEAR_ERROR';

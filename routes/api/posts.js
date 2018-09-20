@@ -147,9 +147,11 @@ router.delete(
 			.then(post => {
 				if (post.comments.filter(
 					comment => (comment._id.toString() === req.params.comment_id &&
-								comment.user === req.user.id)
+								comment.user.toString() === req.user.id)
 				).length === 0){
-					return res.status(404).json({commentnotexists: 'Comment does not exist or you don\'t have right for edit it'});
+					return res
+							.status(404)
+							.json({commentnotexists: 'Comment does not exist or you don\'t have right for edit it'});
 				}
 				const removeIndex = post.comments
 					.map(item => item._id.toString())

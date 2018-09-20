@@ -5,26 +5,31 @@ import {Link} from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import {getPost} from "../../actions/postActions";
 import PostItem from '../posts/PostItem';
+import CommentForm from './CommentForm';
+import CommentFeed from './CommentFeed';
 
 
 class Post extends Component {
 	componentDidMount(){
 		this.props.getPost(this.props.match.params.id);
-
 	}
-	render() {
-		const { post, loading } = this.props;
-		let postContent;
 
+	render() {
+		const { post, loading } = this.props.post;
+		let postContent;
+		console.log(post);
 		if(post === null || loading || Object.keys(post).length === 0) {
 			postContent = <Spinner/>
 		} else {
 			postContent = (
 					<div>
-						<PostItem post={post} showAction={false}/>
+						<PostItem post={post} showActions={false}/>
+						<CommentForm postId={post._id}/>
+						<CommentFeed comments={post.comments} postId={post._id}/>
 					</div>
 			)
 		}
+
 		return (
 				<div className="post">
 					<div className="container">
@@ -35,6 +40,8 @@ class Post extends Component {
 								</Link>
 							</div>
 						</div>
+						{postContent}
+
 					</div>
 				</div>
 		);
@@ -46,6 +53,6 @@ Post.propTypes = {
 };
 
 const mapStateToProps = state => ({
-	auth: state.auth
+	post: state.post
 });
 export default connect(mapStateToProps, {getPost})(Post);
