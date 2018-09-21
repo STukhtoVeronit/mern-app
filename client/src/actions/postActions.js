@@ -9,6 +9,7 @@ import {
 	DELETE_POST,
 	CLEAR_ERROR
 } from './types';
+import {receiveErrorAction} from "./errorAction";
 
 export const addPost = postData => dispatch => {
 	dispatch(clearError());
@@ -19,20 +20,14 @@ export const addPost = postData => dispatch => {
 						payload: res.data
 					})
 			)
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 export const addLike = id => dispatch => {
 	axios
 			.post(`/api/posts/like/${id}`)
 			.then(res => dispatch(getPosts()))
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 export const getPosts = () => dispatch => {
@@ -69,10 +64,7 @@ export const removeLike = id => dispatch => {
 	axios
 			.post(`/api/posts/like/${id}`)
 			.then(res => dispatch(getPosts()))
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 export const deletePost = id => dispatch => {
@@ -83,15 +75,11 @@ export const deletePost = id => dispatch => {
 						payload: id
 					})
 			)
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 
 export const deleteComment = (postId, commentId) => dispatch => {
-	console.log(postId, commentId);
 	axios
 			.delete(`/api/posts/comment/${postId}/${commentId}`)
 			.then(res => dispatch({
@@ -99,10 +87,7 @@ export const deleteComment = (postId, commentId) => dispatch => {
 						payload: res.data
 					})
 			)
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 export const addComment = (postId, commentData) => dispatch => {
@@ -114,10 +99,7 @@ export const addComment = (postId, commentData) => dispatch => {
 						payload: res.data
 					})
 			)
-			.catch(err => dispatch({
-				type: GET_ERRORS,
-				payload: err.response.data
-			}));
+			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
 
