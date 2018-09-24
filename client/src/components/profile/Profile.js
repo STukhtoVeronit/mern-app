@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {getProfileByHandle} from "../../actions/profileActions";
+import history from "../../history";
 
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';
@@ -20,7 +21,7 @@ class Profile extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.profile.profile === null && this.props.profile.loading) {
-			this.props.history.push('/not-found');
+			history.push('/not-found');
 		}
 	}
 

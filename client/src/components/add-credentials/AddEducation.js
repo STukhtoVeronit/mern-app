@@ -45,7 +45,7 @@ class AddEducation extends Component {
       description: this.state.description
     };
 
-    this.props.addEducation(eduData, this.props.history);
+    this.props.addEducation(eduData);
   }
 
   onChange(e) {

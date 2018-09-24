@@ -1,4 +1,5 @@
 import axios from 'axios';
+import history from "../history";
 
 import {
 	GET_PROFILE,
@@ -40,7 +41,7 @@ export const deleteAccount = () => dispatch => {
 };
 
 
-export const createProfile = (profileData, history) => dispatch => {
+export const createProfile = (profileData) => dispatch => {
 	axios
 			.post('/api/profile', profileData)
 			.then(res => history.push('/dashboard'))
@@ -89,7 +90,7 @@ export const getProfiles = () => dispatch => {
 // };
 
 
-export const addExperience = (expData, history) => dispatch => {
+export const addExperience = (expData) => dispatch => {
 	axios
 			.post('/api/profile/experience', expData)
 			.then(res => history.push('/dashboard'))
@@ -106,7 +107,7 @@ export const deleteExperience = (id) => dispatch => {
 			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
-export const addEducation = (eduData, history) => dispatch => {
+export const addEducation = (eduData) => dispatch => {
 	axios
 			.post('/api/profile/education', eduData)
 			.then(res => history.push('/dashboard'))

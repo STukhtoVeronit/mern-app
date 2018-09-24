@@ -61,7 +61,7 @@ class CreateProfile extends Component {
 			instagram: this.state.instagram
 		};
 
-		this.props.createProfile(profileData, this.props.history);
+		this.props.createProfile(profileData);
 	}
 
 	render() {

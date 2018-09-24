@@ -1,5 +1,7 @@
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
 export const REGISTER_USER = 'REGISTER_USER';
 export const SET_USER_EMAIL = 'SET_USER_EMAIL';
 

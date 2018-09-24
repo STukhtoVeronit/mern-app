@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loginUser} from "../../actions/authActions";
 import TextFieldGroup from '../common/TextFieldGroup';
+import history from '../../history';
 
 
 class Login extends Component {
@@ -18,12 +19,12 @@ class Login extends Component {
 	}
 	componentDidMount() {
 		if (this.props.auth.isAuthenticated) {
-			this.props.history.push('/dashboard');
+			history.push('/dashboard');
 		}
 	}
 	componentWillReceiveProps(nextProps){
 		if (nextProps.auth.isAuthenticated){
-			this.props.history.push('/dashboard');
+			history.push('/dashboard');
 		}
 		if (nextProps.errors) {
 			this.setState({errors: nextProps.errors});

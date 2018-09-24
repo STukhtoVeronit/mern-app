@@ -4,6 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {registerUser} from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
+import history from "../../history";
 
 class Register extends Component {
 	constructor() {
@@ -21,7 +22,7 @@ class Register extends Component {
 
 	componentDidMount() {
 		if (this.props.auth.isAuthenticated) {
-			this.props.history.push('/dashboard');
+			history.push('/dashboard');
 		}
 	}
 
@@ -45,7 +46,7 @@ class Register extends Component {
 			password2: this.state.password2
 		};
 
-		this.props.registerUser(newUser, this.props.history);
+		this.props.registerUser(newUser);
 
 	}
 
