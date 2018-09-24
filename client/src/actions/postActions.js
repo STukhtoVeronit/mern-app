@@ -29,6 +29,13 @@ export const addLike = id => dispatch => {
 			.catch(err => dispatch(receiveErrorAction(err)));
 };
 
+export const removeLike = id => dispatch => {
+	axios
+			.post(`/api/posts/like/${id}`)
+			.then(res => dispatch(getPosts()))
+			.catch(err => dispatch(receiveErrorAction(err)));
+};
+
 export const getPosts = () => dispatch => {
 	dispatch(setPostLoading());
 	axios
@@ -59,13 +66,6 @@ export const getPost = id => dispatch => {
 			}));
 };
 
-export const removeLike = id => dispatch => {
-	axios
-			.post(`/api/posts/like/${id}`)
-			.then(res => dispatch(getPosts()))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
-
 export const deletePost = id => dispatch => {
 	axios
 			.delete(`/api/posts/${id}`)
@@ -76,7 +76,6 @@ export const deletePost = id => dispatch => {
 			)
 			.catch(err => dispatch(receiveErrorAction(err)));
 };
-
 
 export const deleteComment = (postId, commentId) => dispatch => {
 	axios
