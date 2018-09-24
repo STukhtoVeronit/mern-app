@@ -4,19 +4,20 @@ import rootReducer from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/rootSaga';
 
-
 const initialState = {};
 
 const middlewares = [];
 
-// if (process.env.NODE_ENV === `development`) {
-// 	const { logger } = require(`redux-logger`);
-//
-// 	middlewares.push(logger);
-// }
 const sagaMiddleware = createSagaMiddleware();
 middlewares.push(sagaMiddleware);
+middlewares.push(thunk);
 
+if (process.env.NODE_ENV === `development`) {
+	const { logger } = require(`redux-logger`);
+
+	middlewares.push(logger);
+}
+//TODO: fix issue with redux-devtools(error if redux-devtool is not installed )
 const store = createStore(
 		rootReducer, // reducers
 		initialState, // our state

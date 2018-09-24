@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { withRouter	} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {registerUser} from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
@@ -18,6 +18,7 @@ class Register extends Component {
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 	}
+
 	componentDidMount() {
 		if (this.props.auth.isAuthenticated) {
 			this.props.history.push('/dashboard');
@@ -52,7 +53,6 @@ class Register extends Component {
 		const {errors} = this.state;
 		return (
 				<div className="register">
-					{errors ? errors.name : "yse vporieadke"}
 					<div className="container">
 						<div className="row">
 							<div className="col-md-8 m-auto">
@@ -72,7 +72,7 @@ class Register extends Component {
 											value={this.state.email}
 											name="email"
 											placeholder="email"
-											error={errors.name}
+											error={errors.email}
 											info="This site uses Gravatar so if you want a
 											profile image, use a Gravatar email"
 									/>

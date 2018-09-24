@@ -1,25 +1,19 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import {GET_ERRORS, SET_CURRENT_USER, REGISTER_USER} from "./types";
+import {SET_CURRENT_USER, REGISTER_USER, SET_USER_EMAIL} from "./types";
 import {receiveErrorAction} from "./errorAction";
 
-//TODO: Ask how to dispatch history to saga
 // Register USER
-export const registerUser = (userData, history) => {
-	return {
+export const registerUser = userData => ({
 		type: REGISTER_USER,
-		payload: {userData, history}
-	}
-	// axios
-	// 		.post('/api/users/register', userData)
-	// 		.then(res => history.push('/login'))
-	// 		.catch(err => dispatch(receiveErrorAction(err)));
-};
+		payload: userData
+});
 
-export const reciveRegisterUser = (userData, history) => {
-	history.push('/login');
-};
+export const reciveRegisterUser = userData => ({
+		type: SET_USER_EMAIL,
+		payload: userData
+	});
 
 // Login - get User token
 export const loginUser = (userData) => dispatch => {
@@ -36,7 +30,7 @@ export const loginUser = (userData) => dispatch => {
 };
 
 // Logout User
-export const logoutUser = (history) => dispatch => {
+export const logoutUser = () => dispatch => {
 	localStorage.removeItem('jwtToken');
 	setAuthToken(false);
 	dispatch(setCurrentUser({}));

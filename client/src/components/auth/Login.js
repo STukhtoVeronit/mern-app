@@ -28,8 +28,8 @@ class Login extends Component {
 		if (nextProps.errors) {
 			this.setState({errors: nextProps.errors});
 		}
-		if (nextProps.email) {
-			this.setState({email: nextProps.email});
+		if (nextProps.auth.user.email) {
+			//TODO: if user have just register insert its email
 		}
 	}
 

@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import {
 	ADD_POST,
-	GET_ERRORS,
 	POST_LOADING,
 	GET_POSTS,
 	GET_POST,

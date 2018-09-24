@@ -6,3 +6,14 @@ body {
 .navbar-nav .rounded-circle{
     width: 25px;
 }
+#root{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+.App{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
