@@ -1,4 +1,6 @@
 import {createStore, applyMiddleware, compose} from 'redux';
+import {persistStore, persistReducer} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import createSagaMiddleware from 'redux-saga';
@@ -12,20 +14,28 @@ const sagaMiddleware = createSagaMiddleware();
 middlewares.push(sagaMiddleware);
 middlewares.push(thunk);
 
-if (process.env.NODE_ENV === `development`) {
-	const { logger } = require(`redux-logger`);
+// Redux-Persist
+const persistConfig = {
+	key: 'root',
+	storage
+};
 
-	middlewares.push(logger);
-}
-//TODO: fix issue with redux-devtools(error if redux-devtool is not installed )
+// const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// if (process.env.NODE_ENV === `development`) {
+// 	const {logger} = require(`redux-logger`);
+// 	middlewares.push(logger);
+// }
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
 		rootReducer, // reducers
 		initialState, // our state
-		compose( //middleware
-				applyMiddleware(...middlewares),
-				window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-		)
+		composeEnhancers(applyMiddleware(...middlewares))
 );
+
+export const persistor = persistStore(store);
 
 sagaMiddleware.run(rootSaga);
 

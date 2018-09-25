@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+//TODO: redo export using one object 'auth'
 export function postUserRegister(uuid) {
 	return new Promise((resolve, reject) => {
 		axios

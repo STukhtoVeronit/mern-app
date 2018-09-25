@@ -15,9 +15,9 @@ class PostItem extends Component {
 		this.props.addLike(id);
 	}
 
-	onUnlikeClick(id) {
-		this.props.removeLike(id);
-	}
+	// onUnlikeClick(id) {
+	// 	this.props.removeLike(id);
+	// }
 
 	findUserLike(likes) {
 		const {auth} = this.props;
@@ -52,16 +52,16 @@ class PostItem extends Component {
 										className="btn btn-light mr-1">
                   <i
 											className={classnames('fas fa-thumbs-up', {
-												'text-info': this.findUserLike(post.likes)
+												'text-info': post.hasOwnProperty("likes") ? this.findUserLike(post.likes) : 0
 											})}/>
-                  <span className="badge badge-light">{post.likes.length}</span>
+                  <span className="badge badge-light">{post.hasOwnProperty("likes") ? post.likes.length : 0}</span>
                 </button>
-                <button
-										onClick={this.onUnlikeClick.bind(this, post._id)}
-										type="button"
-										className="btn btn-light mr-1">
-                  <i className="text-secondary fas fa-thumbs-down"/>
-                </button>
+                {/*<button*/}
+										{/*onClick={this.onUnlikeClick.bind(this, post._id)}*/}
+										{/*type="button"*/}
+										{/*className="btn btn-light mr-1">*/}
+                  {/*<i className="text-secondary fas fa-thumbs-down"/>*/}
+                {/*</button>*/}
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   Comments
                 </Link>
@@ -90,12 +90,11 @@ PostItem.propType = {
 	post: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired,
 	deletePost: PropTypes.func.isRequired,
-	addLike: PropTypes.func.isRequired,
-	removeLike: PropTypes.func.isRequired
+	addLike: PropTypes.func.isRequired
 };
 
 const MapStateToProps = state => ({
 	auth: state.auth
 });
 
-export default connect(MapStateToProps, {deletePost, addLike, removeLike})(PostItem);
+export default connect(MapStateToProps, {deletePost, addLike})(PostItem);

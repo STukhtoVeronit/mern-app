@@ -1,6 +1,6 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {postUserLogin, postUserRegister} from '../api/authApi';
-import {reciveRegisterUser, setCurrentUser} from '../actions/authActions';
+import {receiveRegisterUser, setCurrentUser} from '../actions/authActions';
 import {REGISTER_USER, USER_LOGIN, USER_LOGOUT} from "../actions/types";
 import history from '../history';
 
@@ -16,7 +16,7 @@ function* callPushRegisterUser(action) {
 	try {
 		const userData = action.payload;
 		const response = yield call(postUserRegister, userData);
-		yield put(reciveRegisterUser({email: response.data.email}));
+		yield put(receiveRegisterUser({email: response.data.email}));
 		history.push('/login');
 	} catch (error) {
 		yield put(receiveErrorAction(error));

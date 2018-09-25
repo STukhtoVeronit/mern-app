@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+
 import setAuthToken from './utils/setAuthToken';
 import {logoutUser, setCurrentUser} from "./actions/authActions";
 import {clearCurrentProfile} from "./actions/profileActions";

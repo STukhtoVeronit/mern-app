@@ -1,132 +1,75 @@
-import axios from 'axios';
-import history from "../history";
-
 import {
 	GET_PROFILE,
 	PROFILE_LOADING,
 	CLEAR_CURRENT_PROFILE,
-	SET_CURRENT_USER, GET_PROFILES
+	GET_PROFILES,
+	GET_CURRENT_PROFILE,
+	DELETE_ACCOUNT,
+	CREATE_PROFILE,
+	GET_PROFILE_BY_HANDLE,
+	GET_ALL_PROFILES,
+	ADD_PROFILE_EXPERIENCE,
+	DELETE_PROFILE_EXPERIENCE,
+	ADD_PROFILE_EDUCATION,
+	DELETE_PROFILE_EDUCATION
 } from "./types";
-import {receiveErrorAction} from "./errorAction";
 
-export const setProfileLoading = () => {
-	return {
-		type: PROFILE_LOADING
-	}
-};
+export const setProfileLoading = () => ({
+	type: PROFILE_LOADING
+});
 
-export const getCurrentProfile = () => dispatch => {
-	dispatch(setProfileLoading());
-	axios.get('/api/profile')
-			.then(res => dispatch({
-				type: GET_PROFILE,
-				payload: res.data
-			}))
-			.catch(err => dispatch({
-				type: GET_PROFILE,
-				payload: {}
-			}))
-};
+export const getCurrentProfile = () => ({
+	type: GET_CURRENT_PROFILE
+});
 
-export const deleteAccount = () => dispatch => {
-	if (window.confirm('Are you shure about this?')){
-		axios
-				.delete('/api/profile')
-				.then(res => dispatch({
-					type: SET_CURRENT_USER,
-					payload: {}
-				}))
-				.catch(err => dispatch(receiveErrorAction(err)));
-	}
-};
+export const receiveProfile = currentProfile => ({
+	type: GET_PROFILE,
+	payload: currentProfile
+});
 
+export const deleteAccount = () => ({
+	type: DELETE_ACCOUNT
+});
 
-export const createProfile = (profileData) => dispatch => {
-	axios
-			.post('/api/profile', profileData)
-			.then(res => history.push('/dashboard'))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
+export const createProfile = (profileData) => ({
+	type: CREATE_PROFILE,
+	payload: profileData
+});
 
-export const getProfileByHandle = handle => dispatch => {
-	dispatch(setProfileLoading());
-	axios
-			.get(`/api/profile/handle/${handle}`)
-			.then(res =>
-					dispatch({
-						type: GET_PROFILE,
-						payload: res.data
-					})
-			)
-			.catch(err =>
-					dispatch({
-						type: GET_PROFILE,
-						payload: null
-					})
-			);
-};
+export const getProfileByHandle = handle => ({
+	type: GET_PROFILE_BY_HANDLE,
+	payload: handle
+});
 
-export const getProfiles = () => dispatch => {
-	dispatch(setProfileLoading());
-	axios.get('/api/profile/all')
-			.then(res => dispatch({
-				type: GET_PROFILES,
-				payload: res.data
-			}))
-			.catch(err => dispatch({
-				type: GET_PROFILES,
-				payload: {}
-			}))
-};
+export const getProfiles = () => ({
+	type: GET_ALL_PROFILES
+});
 
-// export const getProfiles = function*() {
-// 	try {
-// 		const response = yield call(()=>axios.get('/api/profile/all'));
-// 		yield put({type: "GET_PROFILES", payload: response.data});
-// 	} catch (e) {
-//
-// 	}
-//
-// };
+export const receiveProfiles = (profiles) => ({
+	type: GET_PROFILES,
+	payload: profiles
+});
 
+export const addExperience = (expData) => ({
+	type: ADD_PROFILE_EXPERIENCE,
+	payload: expData
+});
 
-export const addExperience = (expData) => dispatch => {
-	axios
-			.post('/api/profile/experience', expData)
-			.then(res => history.push('/dashboard'))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
+export const deleteExperience = (id) => ({
+	type: DELETE_PROFILE_EXPERIENCE,
+	payload: id
+});
 
-export const deleteExperience = (id) => dispatch => {
-	axios
-			.delete(`/api/profile/experience/${id}`)
-			.then(res => dispatch({
-				type: GET_PROFILE,
-				payload: res.data
-			}))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
+export const addEducation = (eduData) => ({
+	type: ADD_PROFILE_EDUCATION,
+	payload: eduData
+});
 
-export const addEducation = (eduData) => dispatch => {
-	axios
-			.post('/api/profile/education', eduData)
-			.then(res => history.push('/dashboard'))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
+export const deleteEducation = (id) => ({
+	type: DELETE_PROFILE_EDUCATION,
+	payload: id
+});
 
-export const deleteEducation = (id) => dispatch => {
-	axios
-			.delete(`/api/profile/education/${id}`)
-			.then(res =>  dispatch({
-				type: GET_PROFILE,
-				payload: res.data
-			}))
-			.catch(err => dispatch(receiveErrorAction(err)));
-};
-
-
-export const clearCurrentProfile = () => {
-	return {
+export const clearCurrentProfile = () => ({
 		type: CLEAR_CURRENT_PROFILE
-	}
-};
+});

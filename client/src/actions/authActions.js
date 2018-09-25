@@ -1,16 +1,21 @@
-import setAuthToken from '../utils/setAuthToken';
-import {SET_CURRENT_USER, REGISTER_USER, SET_USER_EMAIL, USER_LOGIN, USER_LOGOUT} from "./types";
+import {
+	SET_CURRENT_USER,
+	REGISTER_USER,
+	SET_USER_EMAIL,
+	USER_LOGIN,
+	USER_LOGOUT
+} from "./types";
 
 // Register USER
 export const registerUser = userData => ({
-		type: REGISTER_USER,
-		payload: userData
+	type: REGISTER_USER,
+	payload: userData
 });
 
-export const reciveRegisterUser = userData => ({
-		type: SET_USER_EMAIL,
-		payload: userData
-	});
+export const receiveRegisterUser = userData => ({
+	type: SET_USER_EMAIL,
+	payload: userData
+});
 
 // Login - get User token
 export const loginUser = (userData) => ({
@@ -24,9 +29,7 @@ export const logoutUser = () => ({
 });
 
 //Set current user
-export const setCurrentUser = (decoded) => {
-	return {
+export const setCurrentUser = (decoded) => ({
 		type: SET_CURRENT_USER,
 		payload: decoded
-	}
-};
+});
