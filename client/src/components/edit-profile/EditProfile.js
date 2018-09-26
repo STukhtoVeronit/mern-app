@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -8,8 +8,9 @@ import SelectListGroup from '../common/SelectListGroup';
 import {withRouter} from "react-router-dom";
 import {createProfile, getCurrentProfile} from "../../actions/profileActions";
 import isEmpty from '../../validation/is-empty';
+import ButtonBack from "../common/ButtonBack";
 
-class CreateProfile extends Component {
+class CreateProfile extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -48,7 +49,7 @@ class CreateProfile extends Component {
 
 			const skillsCSV = profile.skills.join(',');
 
-			// If profile field doesnt exist, make empty string
+			// If profile field doesn't exist, make empty string
 			profile.company = !isEmpty(profile.company) ? profile.company : '';
 			profile.website = !isEmpty(profile.website) ? profile.website : '';
 			profile.location = !isEmpty(profile.location) ? profile.location : '';
@@ -190,6 +191,7 @@ class CreateProfile extends Component {
 					<div className="container">
 						<div className="row">
 							<div className="col-md-8 m-auto">
+							<ButtonBack/>
 								<h1 className="display-4 text-center">Edit Your Profile</h1>
 
 								<small className="d-block pb-3">* = required fields</small>
@@ -221,7 +223,7 @@ class CreateProfile extends Component {
 											info="Could be your own company or one you work for"
 									/>
 									<TextFieldGroup
-											placeholder="Website"
+											placeholder="https://yourwebsite"
 											name="website"
 											value={this.state.website}
 											onChange={this.onChange}

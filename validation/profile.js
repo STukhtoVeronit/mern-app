@@ -26,38 +26,38 @@ module.exports = function validateProfileInput(data) {
 	}
 
 	if (!isEmpty(data.website)){
-		if (!Validator.isURL(data.website)) {
-			errors.website = 'Not a valid URL'
+		if (!Validator.isURL(data.website, {require_protocol: true})) {
+			errors.website = 'Not a valid URL. You should use full url link.'
 		}
 	}
 
 	if (!isEmpty(data.youtube)){
-		if (!Validator.isURL(data.youtube)) {
-			errors.youtube = 'Not a valid URL'
+		if (!Validator.isURL(data.youtube, {require_protocol: true})) {
+			errors.youtube = 'Not a valid URL. You should use full url link.'
 		}
 	}
 
 	if (!isEmpty(data.twitter)){
-		if (!Validator.isURL(data.twitter)) {
-			errors.twitter = 'Not a valid URL'
+		if (!Validator.isURL(data.twitter, {require_protocol: true})) {
+			errors.twitter = 'Not a valid URL. You should use full url link.'
 		}
 	}
 
 	if (!isEmpty(data.facebook)){
-		if (!Validator.isURL(data.facebook)) {
-			errors.facebook = 'Not a valid URL'
+		if (!Validator.isURL(data.facebook, {require_protocol: true})) {
+			errors.facebook = 'Not a valid URL. You should use full url link.'
 		}
 	}
 
 	if (!isEmpty(data.instagram)){
-		if (!Validator.isURL(data.instagram)) {
-			errors.instagram = 'Not a valid URL'
+		if (!Validator.isURL(data.instagram, {require_protocol: true})) {
+			errors.instagram = 'Not a valid URL. You should use full url link.'
 		}
 	}
 
 	if (!isEmpty(data.linkedin)){
-		if (!Validator.isURL(data.linkedin)) {
-			errors.linkedin = 'Not a valid URL'
+		if (!Validator.isURL(data.linkedin, {require_protocol: true})) {
+			errors.linkedin = 'Not a valid URL. You should use full url link.'
 		}
 	}
 

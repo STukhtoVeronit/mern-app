@@ -8,14 +8,16 @@ import Provider from "react-redux/es/components/Provider";
 import store, {persistor} from "./store";
 import {PersistGate} from 'redux-persist/integration/react';
 import {Router} from "react-router-dom";
+import Spinner from "./components/common/Spinner";
 
 ReactDOM.render(
-		<Provider store={store}>
-			{/*<PersistGate loading={null} persistor={persistor}>*/}
+		<PersistGate loading={<Spinner/>} persistor={persistor}>
+			<Provider store={store}>
 				<Router history={history}>
 					<App/>
 				</Router>
-			{/*</PersistGate>*/}
-		</Provider>,
+			</Provider>
+		</PersistGate>
+		,
 		document.getElementById('root'));
 registerServiceWorker();

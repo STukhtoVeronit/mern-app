@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import Moment from 'react-moment';
 
-class ProfileCreds extends Component {
+class ProfileCreds extends PureComponent {
 	render() {
 		const {experience, education} = this.props.profile;
 

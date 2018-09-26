@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -9,7 +9,7 @@ import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
 
 
-class Post extends Component {
+class Post extends PureComponent {
 	componentDidMount(){
 		this.props.getPost(this.props.match.params.id);
 	}

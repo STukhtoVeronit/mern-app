@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {loginUser} from "../../actions/authActions";
@@ -6,7 +6,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import history from '../../history';
 
 
-class Login extends Component {
+class Login extends PureComponent {
 	constructor() {
 		super();
 		this.state = {

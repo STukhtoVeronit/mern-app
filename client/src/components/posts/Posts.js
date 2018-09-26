@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PostForm from './PostForm';
@@ -6,7 +6,7 @@ import Spinner from '../common/Spinner';
 import {getPosts} from "../../actions/postActions";
 import PostFeed from "./PostFeed";
 
-class Posts extends Component {
+class Posts extends PureComponent {
 	componentDidMount(){
 		this.props.getPosts();
 	}
@@ -14,7 +14,7 @@ class Posts extends Component {
 		const { posts, loading } = this.props.post;
 		let postContent;
 
-		if (posts === null || loading) {
+		if (!Object.keys(posts).length || loading) {
 			postContent = <Spinner/>
 		} else {
 			postContent = <PostFeed posts={posts}/>
@@ -29,7 +29,6 @@ class Posts extends Component {
 							</div>
 						</div>
 					</div>
-
 				</div>
 		);
 	}

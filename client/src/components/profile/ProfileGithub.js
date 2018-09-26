@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-class ProfileGithub extends Component {
+class ProfileGithub extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {

@@ -1,4 +1,3 @@
-import axios from 'axios';
 
 import {
 	ADD_POST,
@@ -8,8 +7,6 @@ import {
 	DELETE_POST,
 	CLEAR_ERROR, POST_NEW_POST, FETCH_POSTS, FETCH_POST, DELETE_POST_BY_ID, DELETE_COMMENT, ADD_COMMENT, ADD_LIKE
 } from './types';
-
-import {receiveErrorAction} from "./errorAction";
 
 export const addPost = post => ({
 	type: POST_NEW_POST,

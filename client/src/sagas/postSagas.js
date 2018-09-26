@@ -7,9 +7,7 @@ import {
 	POST_NEW_POST
 } from "../actions/types";
 import api from "../api/postApi";
-import history from "../history";
 import {receiveErrorAction} from "../actions/errorAction";
-import {setCurrentUser} from "../actions/authActions";
 import {
 	clearError, receiveAddPost, receiveDeletePost, receivePost, receivePosts, setPostLoading
 } from "../actions/postActions";

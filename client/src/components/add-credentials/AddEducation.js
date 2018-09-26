@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, {Component, PureComponent} from 'react';
+import { withRouter } from 'react-router-dom';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addEducation } from '../../actions/profileActions';
+import ButtonBack from "../common/ButtonBack";
 
-class AddEducation extends Component {
+class AddEducation extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -67,9 +68,7 @@ class AddEducation extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to="/dashboard" className="btn btn-light">
-                Go Back
-              </Link>
+              <ButtonBack/>
               <h1 className="display-4 text-center">Add Education</h1>
               <p className="lead text-center">
                 Add any school, bootcamp, etc that you have attended

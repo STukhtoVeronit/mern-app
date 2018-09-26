@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -6,7 +6,7 @@ import {registerUser} from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 import history from "../../history";
 
-class Register extends Component {
+class Register extends PureComponent {
 	constructor() {
 		super();
 		this.state = {

@@ -27,7 +27,7 @@ import NotFound from "./components/not-found/NotFound";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 
-
+//TODO: store logic into saga
 if (localStorage.jwtToken) {
 	setAuthToken(localStorage.jwtToken);
 	const decoded = jwt_decode(localStorage.jwtToken);
@@ -49,54 +49,46 @@ class App extends Component {
 					<Route exact path="/" component={Landing}/>
 					<main>
 						<div className="container">
+							<Switch>
 							<Route exact path="/register" component={Register}/>
 							<Route exact path="/login" component={Login}/>
 							<Route exact path="/profiles" component={Profiles}/>
 							<Route exact path="/profile/:handle" component={Profile}/>
+							<Route exact path="/not-found" component={NotFound}/>
 
-							<Switch>
+
 								<PrivateRoute
 										exact path="/dashboard"
 										component={Dashboard}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/create-profile"
 										component={CreateProfile}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/edit-profile"
 										component={EditProfile}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/add-experience"
 										component={AddExperience}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/add-education"
 										component={AddEducation}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/feed"
 										component={Posts}/>
-							</Switch>
 
-							<Switch>
 								<PrivateRoute
 										exact path="/post/:id"
 										component={Post}/>
+
+								<Route path='*' component={NotFound} />
+
 							</Switch>
 
-							<Route exact path="/not-found" component={NotFound}/>
 						</div>
 					</main>
 					<Footer/>

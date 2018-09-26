@@ -20,7 +20,7 @@ const persistConfig = {
 	storage
 };
 
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // if (process.env.NODE_ENV === `development`) {
 // 	const {logger} = require(`redux-logger`);
@@ -30,7 +30,7 @@ const persistConfig = {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-		rootReducer, // reducers
+		persistedReducer, // reducers
 		initialState, // our state
 		composeEnhancers(applyMiddleware(...middlewares))
 );

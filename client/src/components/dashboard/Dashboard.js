@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -8,7 +8,7 @@ import ProfileActions from './ProfileActions';
 import Education from './Education';
 import Experience from './Experience';
 
-class Dashboard extends Component {
+class Dashboard extends PureComponent {
 	componentDidMount() {
 		this.props.getCurrentProfile();
 	}

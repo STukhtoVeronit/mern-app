@@ -23,7 +23,7 @@ function* callGetProfileByHandle(action) {
 		const response = yield call(api.profile.getProfileByHandle, action.payload);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
-		yield put(receiveProfile({}));
+		yield put(receiveErrorAction(error));
 	}
 }
 

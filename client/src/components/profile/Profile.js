@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {getProfileByHandle} from "../../actions/profileActions";
 import history from "../../history";
 
@@ -10,8 +9,9 @@ import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
 import Spinner from '../common/Spinner';
+import ButtonBack from "../common/ButtonBack";
 
-class Profile extends Component {
+class Profile extends PureComponent {
 
 	componentDidMount() {
 		if (this.props.match.params.handle) {
@@ -34,11 +34,7 @@ class Profile extends Component {
 			profileContent = (
 					<div>
 						<div className="row">
-							<div className="col-md-6">
-								<Link to="/profiles" className="btn btn-light mb-3 float-left">
-									Back To Profiles
-								</Link>
-							</div>
+							<ButtonBack/>
 						</div>
 						<div className="col-md-6">
 						</div>

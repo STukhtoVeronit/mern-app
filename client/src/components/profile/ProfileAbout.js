@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
 
 
-class ProfileAbout extends Component {
+class ProfileAbout extends PureComponent {
 	render() {
 		const { profile } = this.props;
 

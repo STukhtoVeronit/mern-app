@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component, PureComponent} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { deleteExperience } from '../../actions/profileActions';
 
-class Experience extends Component {
+class Experience extends PureComponent {
   onDeleteClick(id) {
     this.props.deleteExperience(id);
   }

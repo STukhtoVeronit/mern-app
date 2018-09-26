@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -8,7 +8,7 @@ import SelectListGroup from '../common/SelectListGroup';
 import {withRouter} from "react-router-dom";
 import {createProfile} from "../../actions/profileActions";
 
-class CreateProfile extends Component {
+class CreateProfile extends PureComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
