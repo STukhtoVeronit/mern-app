@@ -6,7 +6,7 @@ import {registerUser} from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 import history from "../../history";
 
-class Register extends PureComponent {
+class Register extends Component {
 	constructor() {
 		super();
 		this.state = {

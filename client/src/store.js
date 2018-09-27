@@ -23,10 +23,10 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// if (process.env.NODE_ENV === `development`) {
-// 	const {logger} = require(`redux-logger`);
-// 	middlewares.push(logger);
-// }
+if (process.env.NODE_ENV === `development`) {
+	const {logger} = require(`redux-logger`);
+	middlewares.push(logger);
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

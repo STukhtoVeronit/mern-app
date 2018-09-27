@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import history from './history';
 
 import setAuthToken from './utils/setAuthToken';
 import {logoutUser, setCurrentUser, checkJwtToken} from "./actions/authActions";
@@ -44,60 +45,68 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
-	// componentWillMount(){
-	// 	this.props.checkJwtToken();
-	// }
+	componentWillMount() {
+		this.props.checkJwtToken();
+	}
+
 	render() {
 		return (
 				<div className="App">
 					<Navbar/>
-					<Route exact path="/" component={Landing}/>
-					<main>
-						<div className="container">
-							<Switch>
-								<Route exact path="/register" component={Register}/>
-								<Route exact path="/login" component={Login}/>
-								<Route exact path="/profiles" component={Profiles}/>
-								<Route exact path="/profile/:handle" component={Profile}/>
-								<Route exact path="/not-found" component={NotFound}/>
+					<Switch>
+
+						<Route exact path="/" component={Landing}/>
+						<main>
+							<div className="container">
+								<Switch>
+									<Route exact path="/register" component={Register}/>
+									<Route exact path="/login" component={Login}/>
+									<Route exact path="/profiles" component={Profiles}/>
+									<Route exact path="/profile/:handle" component={Profile}/>
+									<Route exact path="/not-found" component={NotFound}/>
 
 
-								<PrivateRoute
-										exact path="/dashboard"
-										component={Dashboard}/>
+									<PrivateRoute
+											exact path="/dashboard"
+											component={Dashboard}/>
 
-								<PrivateRoute
-										exact path="/create-profile"
-										component={CreateProfile}/>
+									<PrivateRoute
+											exact path="/create-profile"
+											component={CreateProfile}/>
 
-								<PrivateRoute
-										exact path="/edit-profile"
-										component={EditProfile}/>
+									<PrivateRoute
+											exact path="/edit-profile"
+											component={EditProfile}/>
 
-								<PrivateRoute
-										exact path="/add-experience"
-										component={AddExperience}/>
+									<PrivateRoute
+											exact path="/add-experience"
+											component={AddExperience}/>
 
-								<PrivateRoute
-										exact path="/add-education"
-										component={AddEducation}/>
+									<PrivateRoute
+											exact path="/add-education"
+											component={AddEducation}/>
 
-								<PrivateRoute
-										exact path="/feed"
-										component={Posts}/>
+									<PrivateRoute
+											exact path="/feed"
+											component={Posts}/>
 
-								<PrivateRoute
-										exact path="/post/:id"
-										component={Post}/>
+									<PrivateRoute
+											exact path="/post/:id"
+											component={Post}/>
 
-								<Route path="*" component={NotFound}/>
+									<Route component={NotFound}/>
 
-							</Switch>
+								</Switch>
 
-						</div>
-					</main>
-					
+
+							</div>
+
+						</main>
+
+					</Switch>
+
 					<Footer/>
+
 				</div>
 
 		);
@@ -113,4 +122,4 @@ const mapStateToProps = state => ({
 	errors: state.errors
 });
 
-export default connect(mapStateToProps, {checkJwtToken})(App);
+export default withRouter(connect(mapStateToProps, {checkJwtToken})(App));
