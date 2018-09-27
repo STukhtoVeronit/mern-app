@@ -13,7 +13,7 @@ img {
 
 .landing {
     position: relative;
-    background: url('./img/landing_bg.jpg') no-repeat center center fixed;
+    background: black url('./img/landing_bg.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     margin-top: -24px;
