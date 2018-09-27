@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import classnames from 'classnames';
 import {Link} from 'react-router-dom';
-import {deletePost, addLike, removeLike} from '../../actions/postActions';
+import {deletePost, addLike} from '../../actions/postActions';
 
 
 class PostItem extends PureComponent {
@@ -14,10 +14,6 @@ class PostItem extends PureComponent {
 	onLikeClick(id) {
 		this.props.addLike(id);
 	}
-
-	// onUnlikeClick(id) {
-	// 	this.props.removeLike(id);
-	// }
 
 	findUserLike(likes) {
 		const {auth} = this.props;
@@ -56,14 +52,8 @@ class PostItem extends PureComponent {
 											})}/>
                   <span className="badge badge-light">{post.hasOwnProperty("likes") ? post.likes.length : 0}</span>
                 </button>
-                {/*<button*/}
-										{/*onClick={this.onUnlikeClick.bind(this, post._id)}*/}
-										{/*type="button"*/}
-										{/*className="btn btn-light mr-1">*/}
-                  {/*<i className="text-secondary fas fa-thumbs-down"/>*/}
-                {/*</button>*/}
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-                  Comments
+                  {post.comments.length} Comments
                 </Link>
 										{post.user === auth.user.id ? (
 												<button

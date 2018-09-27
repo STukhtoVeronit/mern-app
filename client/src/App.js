@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {Route, Switch} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from './utils/setAuthToken';
-import {logoutUser, setCurrentUser} from "./actions/authActions";
+import {logoutUser, setCurrentUser, checkJwtToken} from "./actions/authActions";
 import {clearCurrentProfile} from "./actions/profileActions";
 
 import './App.css';
@@ -42,6 +44,9 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+	// componentWillMount(){
+	// 	this.props.checkJwtToken();
+	// }
 	render() {
 		return (
 				<div className="App">
@@ -50,11 +55,11 @@ class App extends Component {
 					<main>
 						<div className="container">
 							<Switch>
-							<Route exact path="/register" component={Register}/>
-							<Route exact path="/login" component={Login}/>
-							<Route exact path="/profiles" component={Profiles}/>
-							<Route exact path="/profile/:handle" component={Profile}/>
-							<Route exact path="/not-found" component={NotFound}/>
+								<Route exact path="/register" component={Register}/>
+								<Route exact path="/login" component={Login}/>
+								<Route exact path="/profiles" component={Profiles}/>
+								<Route exact path="/profile/:handle" component={Profile}/>
+								<Route exact path="/not-found" component={NotFound}/>
 
 
 								<PrivateRoute
@@ -85,12 +90,13 @@ class App extends Component {
 										exact path="/post/:id"
 										component={Post}/>
 
-								<Route path='*' component={NotFound} />
+								<Route path="*" component={NotFound}/>
 
 							</Switch>
 
 						</div>
 					</main>
+					
 					<Footer/>
 				</div>
 
@@ -98,4 +104,13 @@ class App extends Component {
 	}
 }
 
-export default App;
+App.propTypes = {
+	checkJwtToken: PropTypes.func.isRequired,
+	errors: PropTypes.object,
+};
+
+const mapStateToProps = state => ({
+	errors: state.errors
+});
+
+export default connect(mapStateToProps, {checkJwtToken})(App);

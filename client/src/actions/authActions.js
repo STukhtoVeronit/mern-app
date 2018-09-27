@@ -3,8 +3,13 @@ import {
 	REGISTER_USER,
 	SET_USER_EMAIL,
 	USER_LOGIN,
-	USER_LOGOUT
+	USER_LOGOUT, CHECK_JWT_TOKEN
 } from "./types";
+
+// Check JWT tokken
+export const checkJwtToken = () => ({
+	type: CHECK_JWT_TOKEN,
+});
 
 // Register USER
 export const registerUser = userData => ({

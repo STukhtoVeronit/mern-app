@@ -18,7 +18,7 @@ middlewares.push(thunk);
 const persistConfig = {
 	key: 'root',
 	storage,
-	blacklist: ['auth']
+	blacklist: ['auth', 'errors']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

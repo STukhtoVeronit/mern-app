@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -27,7 +27,7 @@ class Navbar extends Component {
 						<a href="" className="nav-link" onClick={this.onLogoutClick.bind(this)}>
 							<img className='rounded-circle' src={user.avatar} alt={user.name} title="you must have a gravatar"/>
 							{'  '}
-							Logout {user.name}
+							Logout
 						</a>
 
 					</li>
@@ -61,7 +61,6 @@ class Navbar extends Component {
 								</li>
 							</ul>
 							{isAuthenticated ? auhtLinks : guestLinks}
-
 
 						</div>
 					</div>

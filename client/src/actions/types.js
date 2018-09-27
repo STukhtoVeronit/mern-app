@@ -1,3 +1,5 @@
+export const CHECK_JWT_TOKEN = 'CHECK_JWT_TOKEN';
+
 export const GET_ERRORS = 'GET_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const USER_LOGIN = 'USER_LOGIN';
