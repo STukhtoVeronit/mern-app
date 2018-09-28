@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import history from './history';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
-import setAuthToken from './utils/setAuthToken';
-import {logoutUser, setCurrentUser, checkJwtToken} from "./actions/authActions";
-import {clearCurrentProfile} from "./actions/profileActions";
+import {checkJwtToken} from "./actions/authActions";
 
 import './App.css';
-import store from './store';
 
 import PrivateRoute from './components/common/PrivateRoute'
 
@@ -30,22 +25,8 @@ import NotFound from "./components/not-found/NotFound";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 
-//TODO: store logic into saga
-if (localStorage.jwtToken) {
-	setAuthToken(localStorage.jwtToken);
-	const decoded = jwt_decode(localStorage.jwtToken);
-	store.dispatch(setCurrentUser(decoded));
-	const currentTime = Date.now() / 1000;
-
-	if (decoded.exp < currentTime) {
-		store.dispatch(logoutUser());
-		store.dispatch(clearCurrentProfile());
-		window.location.href = '/login';
-	}
-}
-
 class App extends Component {
-	componentWillMount() {
+	componentWillUpdate(nextProps, nextState, nextContext) {
 		this.props.checkJwtToken();
 	}
 
@@ -56,59 +37,49 @@ class App extends Component {
 					<Switch>
 
 						<Route exact path="/" component={Landing}/>
-						<main>
-							<div className="container">
-								<Switch>
-									<Route exact path="/register" component={Register}/>
-									<Route exact path="/login" component={Login}/>
-									<Route exact path="/profiles" component={Profiles}/>
-									<Route exact path="/profile/:handle" component={Profile}/>
-									<Route exact path="/not-found" component={NotFound}/>
 
+						<Switch>
+							<Route exact path="/register" component={Register}/>
+							<Route exact path="/login" component={Login}/>
+							<Route exact path="/profiles" component={Profiles}/>
+							<Route exact path="/profile/:user_id" component={Profile}/>
+							<Route exact path="/not-found" component={NotFound}/>
 
-									<PrivateRoute
-											exact path="/dashboard"
-											component={Dashboard}/>
+							<PrivateRoute
+									exact path="/dashboard"
+									component={Dashboard}/>
 
-									<PrivateRoute
-											exact path="/create-profile"
-											component={CreateProfile}/>
+							<PrivateRoute
+									exact path="/create-profile"
+									component={CreateProfile}/>
 
-									<PrivateRoute
-											exact path="/edit-profile"
-											component={EditProfile}/>
+							<PrivateRoute
+									exact path="/edit-profile"
+									component={EditProfile}/>
 
-									<PrivateRoute
-											exact path="/add-experience"
-											component={AddExperience}/>
+							<PrivateRoute
+									exact path="/add-experience"
+									component={AddExperience}/>
 
-									<PrivateRoute
-											exact path="/add-education"
-											component={AddEducation}/>
+							<PrivateRoute
+									exact path="/add-education"
+									component={AddEducation}/>
 
-									<PrivateRoute
-											exact path="/feed"
-											component={Posts}/>
+							<PrivateRoute
+									exact path="/feed"
+									component={Posts}/>
 
-									<PrivateRoute
-											exact path="/post/:id"
-											component={Post}/>
+							<PrivateRoute
+									exact path="/post/:id"
+									component={Post}/>
 
-									<Route component={NotFound}/>
+							<Route component={NotFound}/>
 
-								</Switch>
-
-
-							</div>
-
-						</main>
-
+						</Switch>
 					</Switch>
 
 					<Footer/>
-
 				</div>
-
 		);
 	}
 }

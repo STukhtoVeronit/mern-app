@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/rootSaga';
+import {createLogger} from 'redux-logger';
 
 const initialState = {};
 
@@ -24,7 +25,7 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 if (process.env.NODE_ENV === `development`) {
-	const {logger} = require(`redux-logger`);
+	const logger = createLogger({collapsed: true});
 	middlewares.push(logger);
 }
 

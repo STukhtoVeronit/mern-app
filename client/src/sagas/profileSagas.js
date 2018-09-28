@@ -6,23 +6,27 @@ import {
 	DELETE_ACCOUNT, DELETE_PROFILE_EDUCATION, DELETE_PROFILE_EXPERIENCE,
 	GET_ALL_PROFILES,
 	GET_CURRENT_PROFILE,
-	GET_PROFILE_BY_HANDLE
+	GET_PROFILE_BY_USER_ID
 } from "../actions/types";
 import api from "../api/profileApi";
 import history from "../history";
 import {receiveErrorAction} from "../actions/errorAction";
-import {receiveProfile, receiveProfiles, setProfileLoading} from "../actions/profileActions";
+import {receiveProfile, receiveProfiles, setProfileLoading, unsetProfileLoading} from "../actions/profileActions";
 import {setCurrentUser} from "../actions/authActions";
 
 export function* watchGetProfileByHandle() {
-	yield takeLatest(GET_PROFILE_BY_HANDLE, callGetProfileByHandle);
+	yield takeLatest(GET_PROFILE_BY_USER_ID, callGetProfileByHandle);
 }
 function* callGetProfileByHandle(action) {
 	try {
 		yield put(setProfileLoading());
-		const response = yield call(api.profile.getProfileByHandle, action.payload);
+		const response = yield call(api.profile.getProfileByUserId, action.payload);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
+		if (Math.floor(error.response.status/100) === 5){
+			history.push('/not-found');
+		}
+		yield put(unsetProfileLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
@@ -36,7 +40,11 @@ function* callGetCurrentProfile(action) {
 		const response = yield call(api.profile.getCurrentProfile);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
-		yield put(receiveProfile({}));
+		if (Math.floor(error.response.status/100) === 5){
+			history.push('/not-found');
+		}
+		yield put(unsetProfileLoading());
+		yield put(receiveErrorAction(error));
 	}
 }
 

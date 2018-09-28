@@ -17,11 +17,20 @@ function getProfiles() {
 				.catch(err => reject(err))
 	});
 }
-
+//TODO: decide existence of this method
 function getProfileByHandle(handle) {
 	return new Promise((resolve, reject) => {
 		axios
 				.get(`/api/profile/handle/${handle}`)
+				.then(res => resolve(res))
+				.catch(err => reject(err))
+	});
+}
+
+function getProfileByUserId(id) {
+	return new Promise((resolve, reject) => {
+		axios
+				.get(`/api/profile/user/${id}`)
 				.then(res => resolve(res))
 				.catch(err => reject(err))
 	});
@@ -91,6 +100,7 @@ export default {
 		postExperience,
 		deleteExperience,
 		postEducation,
-		deleteEducation
+		deleteEducation,
+		getProfileByUserId
 	}
 }

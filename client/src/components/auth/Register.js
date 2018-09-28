@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -6,7 +6,7 @@ import {registerUser} from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 import history from "../../history";
 
-class Register extends Component {
+class Register extends PureComponent {
 	constructor() {
 		super();
 		this.state = {
@@ -53,53 +53,57 @@ class Register extends Component {
 	render() {
 		const {errors} = this.state;
 		return (
-				<div className="register">
+				<main>
 					<div className="container">
-						<div className="row">
-							<div className="col-md-8 m-auto">
-								<h1 className="display-4 text-center">Sign Up</h1>
-								<p className="lead text-center">Create your DevConnector account</p>
-								<form onSubmit={this.onSubmit}>
-									<TextFieldGroup
-											onChange={this.onChange}
-											value={this.state.name}
-											name="name"
-											placeholder="Name"
-											error={errors.name}/>
+						<div className="register">
+							<div className="container">
+								<div className="row">
+									<div className="col-md-8 m-auto">
+										<h1 className="display-4 text-center">Sign Up</h1>
+										<p className="lead text-center">Create your DevConnector account</p>
+										<form onSubmit={this.onSubmit}>
+											<TextFieldGroup
+													onChange={this.onChange}
+													value={this.state.name}
+													name="name"
+													placeholder="Name"
+													error={errors.name}/>
 
-									<TextFieldGroup
-											type="email"
-											onChange={this.onChange}
-											value={this.state.email}
-											name="email"
-											placeholder="email"
-											error={errors.email}
-											info="This site uses Gravatar so if you want a
+											<TextFieldGroup
+													type="email"
+													onChange={this.onChange}
+													value={this.state.email}
+													name="email"
+													placeholder="email"
+													error={errors.email}
+													info="This site uses Gravatar so if you want a
 											profile image, use a Gravatar email"
-									/>
+											/>
 
-									<TextFieldGroup
-											type="password"
-											onChange={this.onChange}
-											value={this.state.password}
-											name="password"
-											placeholder="password"
-											error={errors.password}/>
+											<TextFieldGroup
+													type="password"
+													onChange={this.onChange}
+													value={this.state.password}
+													name="password"
+													placeholder="password"
+													error={errors.password}/>
 
-									<TextFieldGroup
-											type="password"
-											onChange={this.onChange}
-											value={this.state.password2}
-											name="password2"
-											placeholder="Confirm Password"
-											error={errors.password2}/>
+											<TextFieldGroup
+													type="password"
+													onChange={this.onChange}
+													value={this.state.password2}
+													name="password2"
+													placeholder="Confirm Password"
+													error={errors.password2}/>
 
-									<input type="submit" className="btn btn-info btn-block mt-4"/>
-								</form>
+											<input type="submit" className="btn btn-info btn-block mt-4"/>
+										</form>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</main>
 		);
 	}
 }

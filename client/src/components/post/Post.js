@@ -1,6 +1,6 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Spinner from '../common/Spinner';
 import {getPost} from "../../actions/postActions";
@@ -10,14 +10,14 @@ import CommentFeed from './CommentFeed';
 
 
 class Post extends PureComponent {
-	componentDidMount(){
+	componentDidMount() {
 		this.props.getPost(this.props.match.params.id);
 	}
 
 	render() {
-		const { post, loading } = this.props.post;
+		const {post, loading} = this.props.post;
 		let postContent;
-		if(post === null || loading || Object.keys(post).length === 0) {
+		if (post === null || loading || Object.keys(post).length === 0) {
 			postContent = <Spinner/>
 		} else {
 			postContent = (
@@ -30,22 +30,27 @@ class Post extends PureComponent {
 		}
 
 		return (
-				<div className="post">
+				<main>
 					<div className="container">
-						<div className="row">
-							<div className="col-md-12">
-								<Link to="/feed" className="btn btn-light mb-3">
-									Back to feed
-								</Link>
+						<div className="post">
+							<div className="container">
+								<div className="row">
+									<div className="col-md-12">
+										<Link to="/feed" className="btn btn-light mb-3">
+											Back to feed
+										</Link>
+									</div>
+								</div>
+								{postContent}
+
 							</div>
 						</div>
-						{postContent}
-
 					</div>
-				</div>
+				</main>
 		);
 	}
 }
+
 Post.propTypes = {
 	getPost: PropTypes.func.isRequired,
 	post: PropTypes.object.isRequired

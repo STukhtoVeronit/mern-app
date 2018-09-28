@@ -7,7 +7,6 @@ import history from '../history';
 import {receiveErrorAction} from '../actions/errorAction';
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import store from "../store";
 import {clearCurrentProfile} from "../actions/profileActions";
 
 export function* watchCheckJwtToken() {
@@ -16,25 +15,20 @@ export function* watchCheckJwtToken() {
 
 function* callCheckJwtToken(action) {
 	try {
-		//
 		if (localStorage.jwtToken) {
-			setAuthToken(localStorage.jwtToken);
-			// const decoded = jwt_decode(localStorage.jwtToken);
-			// store.dispatch(setCurrentUser(decoded));
-			// const currentTime = Date.now() / 1000;
-			//
-			// if (decoded.exp < currentTime) {
-			// 	store.dispatch(logoutUser());
-			// 	store.dispatch(clearCurrentProfile());
-			// 	window.location.href = '/login';
-			// }
+			yield call(setAuthToken, localStorage.jwtToken);
+			const decoded = yield call(jwt_decode, localStorage.jwtToken);
+			yield put(setCurrentUser(decoded));
+			const currentTime = Date.now() / 1000;
+			if (decoded.exp < currentTime) {
+				yield put(logoutUser());
+				yield put(clearCurrentProfile());
+				history.push('/login');
+
+			}
 		}
-		//
-		// const response = yield call(postUserRegister, userData);
-		// yield put(receiveRegisterUser({email: response.data.email}));
-		// history.push('/login');
 	} catch (error) {
-		// yield put(receiveErrorAction(error));
+		yield put(receiveErrorAction(error));
 	}
 }
 

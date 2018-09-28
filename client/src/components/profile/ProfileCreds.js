@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import Moment from 'react-moment';
 
 class ProfileCreds extends PureComponent {

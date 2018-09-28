@@ -1,5 +1,6 @@
 import {all, call} from "redux-saga/effects";
 import {
+	watchCheckJwtToken,
 	watchPushRegisterUser,
 	watchUserLogin,
 	watchUserLogout,
@@ -47,5 +48,6 @@ export default function* rootSaga() {
 		call(watchDeleteComment),
 		call(watchAddComment),
 		call(watchAddLike),
+		call(watchCheckJwtToken),
 	]);
 }

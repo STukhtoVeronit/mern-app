@@ -1,7 +1,7 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getProfileByHandle} from "../../actions/profileActions";
+import {getProfileByUserId} from "../../actions/profileActions";
 import history from "../../history";
 
 import ProfileHeader from './ProfileHeader';
@@ -14,8 +14,8 @@ import ButtonBack from "../common/ButtonBack";
 class Profile extends PureComponent {
 
 	componentDidMount() {
-		if (this.props.match.params.handle) {
-			this.props.getProfileByHandle(this.props.match.params.handle);
+		if (this.props.match.params.user_id) {
+			this.props.getProfileByHandle(this.props.match.params.user_id);
 		}
 	}
 
@@ -46,16 +46,19 @@ class Profile extends PureComponent {
 			)
 		}
 		return (
-				<div className="profile">
+				<main>
 					<div className="container">
-						<div className="row">
-							<div className="col-md-12">
-								{profileContent}
+						<div className="profile">
+							<div className="container">
+								<div className="row">
+									<div className="col-md-12">
+										{profileContent}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-
-				</div>
+				</main>
 		);
 	}
 }
@@ -69,4 +72,4 @@ const mapStateToProps = state => ({
 	profile: state.profile
 });
 
-export default connect(mapStateToProps, {getProfileByHandle})(Profile);
+export default connect(mapStateToProps, {getProfileByHandle: getProfileByUserId})(Profile);

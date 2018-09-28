@@ -6,16 +6,22 @@ import {
 	GET_CURRENT_PROFILE,
 	DELETE_ACCOUNT,
 	CREATE_PROFILE,
-	GET_PROFILE_BY_HANDLE,
+	GET_PROFILE_BY_USER_ID,
 	GET_ALL_PROFILES,
 	ADD_PROFILE_EXPERIENCE,
 	DELETE_PROFILE_EXPERIENCE,
 	ADD_PROFILE_EDUCATION,
-	DELETE_PROFILE_EDUCATION
+	DELETE_PROFILE_EDUCATION,
+	PROFILE_LOADING_OFF
 } from "./types";
+
 
 export const setProfileLoading = () => ({
 	type: PROFILE_LOADING
+});
+
+export const unsetProfileLoading = () => ({
+	type: PROFILE_LOADING_OFF
 });
 
 export const getCurrentProfile = () => ({
@@ -36,9 +42,9 @@ export const createProfile = (profileData) => ({
 	payload: profileData
 });
 
-export const getProfileByHandle = handle => ({
-	type: GET_PROFILE_BY_HANDLE,
-	payload: handle
+export const getProfileByUserId = id => ({
+	type: GET_PROFILE_BY_USER_ID,
+	payload: id
 });
 
 export const getProfiles = () => ({

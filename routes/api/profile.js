@@ -59,7 +59,7 @@ router.get('/all', (req, res) => {
 		});
 });
 
-
+//TODO: Useless api
 // @route   get api/profile/handle/:handle
 // @desc    get profile by handle
 // @access  Public

@@ -1,17 +1,18 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import PostForm from './PostForm';
 import Spinner from '../common/Spinner';
 import {getPosts} from "../../actions/postActions";
 import PostFeed from "./PostFeed";
 
 class Posts extends PureComponent {
-	componentDidMount(){
+	componentDidMount() {
 		this.props.getPosts();
 	}
+
 	render() {
-		const { posts, loading } = this.props.post;
+		const {posts, loading} = this.props.post;
 		let postContent;
 
 		if (!Object.keys(posts).length || loading) {
@@ -20,16 +21,20 @@ class Posts extends PureComponent {
 			postContent = <PostFeed posts={posts}/>
 		}
 		return (
-				<div className='feed'>
+				<main>
 					<div className="container">
-						<div className="row">
-							<div className="col-md-12">
-								<PostForm/>
-								{postContent}
+						<div className='feed'>
+							<div className="container">
+								<div className="row">
+									<div className="col-md-12">
+										<PostForm/>
+										{postContent}
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</main>
 		);
 	}
 }
@@ -43,4 +48,4 @@ const mapStateToProps = state => ({
 	post: state.post
 });
 
-export default connect(mapStateToProps,{getPosts})(Posts);
+export default connect(mapStateToProps, {getPosts})(Posts);
