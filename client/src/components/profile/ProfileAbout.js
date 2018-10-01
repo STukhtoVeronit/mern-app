@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import isEmpty from '../../validation/is-empty';
-import wikiHOC from "../common/wikipediaHoc";
+import WikiHOC from "../common/WikiHOC";
 
 
 class ProfileAbout extends PureComponent {
@@ -13,13 +13,11 @@ class ProfileAbout extends PureComponent {
 
 		// Skill List
 		const skills = profile.skills.map((skill, index) => (
-				<wikiHOC>
-										 {
-											 <div key={index} className="p-3">
-												 <i className="fa fa-check"/> {skill}
-											 </div>
-										 }
-				</wikiHOC>
+				<WikiHOC  key={index} search={skill}>
+							<div className="p-3">
+								<i className="fa fa-check"/> {skill}
+							</div>
+				</WikiHOC>
 		));
 
 		return (

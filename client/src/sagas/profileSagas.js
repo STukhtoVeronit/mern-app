@@ -15,7 +15,7 @@ import {receiveProfile, receiveProfiles, setProfileLoading, unsetProfileLoading}
 import {setCurrentUser} from "../actions/authActions";
 import {clearError} from "../actions/postActions";
 
-
+//TODO: clear error for profile
 export function* watchGetProfileByHandle() {
 	yield takeLatest(GET_PROFILE_BY_USER_ID, callGetProfileByHandle);
 }

@@ -26,6 +26,7 @@ import {
 	watchFetchPosts,
 	watchPostNewPost
 } from "./postSagas";
+import {watchFetchWikiTerm} from "./wikiSagas";
 
 export default function* rootSaga() {
 	yield all([
@@ -49,5 +50,6 @@ export default function* rootSaga() {
 		call(watchAddComment),
 		call(watchAddLike),
 		call(watchCheckJwtToken),
+		call(watchFetchWikiTerm),
 	]);
 }

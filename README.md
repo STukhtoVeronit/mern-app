@@ -5,7 +5,7 @@ Installing
 Deployment
  - `npm run dev` in `/mear-app` folder
  
- https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&srsearch=node.js&utf8=&format=json&srprop=snippet
+https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=node.js
  
  https://en.wikipedia.org/?curid=26415635
  

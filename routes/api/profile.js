@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const request = require('request');
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -301,5 +302,21 @@ router.delete(
 		});
 	}
 );
+
+
+
+
+// @route   get api/profile/wiki/term
+// @desc    get profile by user
+// @access  Public
+router.get('/wiki/:term', (req, res) => {
+	const errors = {};
+
+	request(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=${req.params.term}`, { json: true }, (err, response, body) => {
+		if (err) { return res.status(504).json({err}); }
+		res.json(response);
+	});
+});
+
 
 module.exports = router;
