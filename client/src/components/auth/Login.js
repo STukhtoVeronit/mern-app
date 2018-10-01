@@ -77,7 +77,6 @@ class Login extends PureComponent {
 						</div>
 					</div>
 				</main>
-
 		);
 	}
 }

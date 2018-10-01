@@ -23,14 +23,14 @@ class Dashboard extends PureComponent {
 
 		let dashboardContent;
 
-		if (profile === null || loading) {
+		if (Object.keys(profile).length === 0 || loading) {
 			dashboardContent = <Spinner/>;
 		} else {
 			//check if logged user has profile data
 			if (Object.keys(profile).length > 0) {
 				dashboardContent = (
 						<div>
-							<p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}> {user.name} </Link></p>
+							<p className="lead text-muted">Welcome <Link to={`/profile/${profile.user._id}`}> {user.name} </Link></p>
 
 							<ProfileActions/>
 							<Experience experience={profile.experience}/>

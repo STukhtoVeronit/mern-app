@@ -28,6 +28,7 @@ import Post from "./components/post/Post";
 class App extends Component {
 	componentWillUpdate(nextProps, nextState, nextContext) {
 		this.props.checkJwtToken();
+		// this.props.clearError();
 	}
 
 	render() {

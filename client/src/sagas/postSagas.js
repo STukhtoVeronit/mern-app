@@ -9,7 +9,7 @@ import {
 import api from "../api/postApi";
 import {receiveErrorAction} from "../actions/errorAction";
 import {
-	clearError, receiveAddPost, receiveDeletePost, receivePost, receivePosts, setPostLoading
+	clearError, deletePostLoading, receiveAddPost, receiveDeletePost, receivePost, receivePosts, setPostLoading
 } from "../actions/postActions";
 
 export function* watchPostNewPost() {
@@ -22,6 +22,7 @@ function* callPostNewPost(action) {
 		const response = yield call(api.post.postNewPost, action.payload);
 		yield put(receiveAddPost(response.data));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
@@ -31,10 +32,12 @@ export function* watchFetchPosts() {
 }
 function* callFetchPosts() {
 	try {
+		yield put(clearError());
 		yield put(setPostLoading());
 		const response = yield call(api.post.getPosts);
 		yield put(receivePosts(response.data));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receivePosts({}));
 	}
 }
@@ -44,10 +47,12 @@ export function* watchFetchPost() {
 }
 function* callFetchPost(action) {
 	try {
+		yield put(clearError());
 		yield put(setPostLoading());
 		const response = yield call(api.post.getPostByID, action.payload);
 		yield put(receivePost(response.data));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receivePost({}));
 	}
 }
@@ -57,9 +62,11 @@ export function* watchDeletePostByID() {
 }
 function* callDeletePostByID(action) {
 	try {
+		yield put(clearError());
 		yield call(api.post.deletePosts, action.payload);
 		yield put(receiveDeletePost(action.payload));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
@@ -69,9 +76,11 @@ export function* watchDeleteComment() {
 }
 function* callDeleteComment(action) {
 	try {
+		yield put(clearError());
 		const response = yield call(api.post.deleteComment, action.payload.postId, action.payload.commentId);
 		yield put(receivePost(response.data));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
@@ -81,9 +90,11 @@ export function* watchAddComment() {
 }
 function* callAddComment(action) {
 	try {
+		yield put(clearError());
 		const response = yield call(api.post.postComment, action.payload.postId, action.payload.commentData);
 		yield put(receivePost(response.data));
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
@@ -93,9 +104,11 @@ export function* watchAddLike() {
 }
 function* callAddLike(action) {
 	try {
+		yield put(clearError());
 		yield call(api.post.postPostLike, action.payload);
 		yield fork(callFetchPosts);
 	} catch (error) {
+		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
 	}
 }

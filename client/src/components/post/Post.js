@@ -17,7 +17,7 @@ class Post extends PureComponent {
 	render() {
 		const {post, loading} = this.props.post;
 		let postContent;
-		if (post === null || loading || Object.keys(post).length === 0) {
+		if (loading || Object.keys(post).length === 0) {
 			postContent = <Spinner/>
 		} else {
 			postContent = (
@@ -59,4 +59,5 @@ Post.propTypes = {
 const mapStateToProps = state => ({
 	post: state.post
 });
+
 export default connect(mapStateToProps, {getPost})(Post);

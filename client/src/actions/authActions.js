@@ -3,7 +3,8 @@ import {
 	REGISTER_USER,
 	SET_USER_EMAIL,
 	USER_LOGIN,
-	USER_LOGOUT, CHECK_JWT_TOKEN
+	USER_LOGOUT,
+	CHECK_JWT_TOKEN
 } from "./types";
 
 // Check JWT tokken

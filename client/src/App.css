@@ -49,3 +49,6 @@ img {
 .table td .btn{
     float: right;
 }
+.wiki_block{
+    cursor: pointer;
+}

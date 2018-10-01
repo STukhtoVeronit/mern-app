@@ -5,7 +5,15 @@ import {
 	GET_POSTS,
 	GET_POST,
 	DELETE_POST,
-	CLEAR_ERROR, POST_NEW_POST, FETCH_POSTS, FETCH_POST, DELETE_POST_BY_ID, DELETE_COMMENT, ADD_COMMENT, ADD_LIKE
+	CLEAR_ERROR,
+	POST_NEW_POST,
+	FETCH_POSTS,
+	FETCH_POST,
+	DELETE_POST_BY_ID,
+	DELETE_COMMENT,
+	ADD_COMMENT,
+	ADD_LIKE,
+	POST_LOADING_OFF
 } from './types';
 
 export const addPost = post => ({
@@ -65,6 +73,10 @@ export const addLike = id => ({
 
 export const setPostLoading = () => ({
 	type: POST_LOADING
+});
+
+export const deletePostLoading = () => ({
+	type: POST_LOADING_OFF
 });
 
 export const clearError = () => ({

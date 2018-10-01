@@ -35,8 +35,8 @@
     "npm": "^6.4.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "validator": "^9.4.1",
-    "redux-saga": "latest"
+    "redux-saga": "latest",
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "nodemon": "^1.17.3"

@@ -5,8 +5,8 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import { addPost } from '../../actions/postActions';
 
 class PostForm extends PureComponent {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			text: '',
 			errors: {}
@@ -16,7 +16,7 @@ class PostForm extends PureComponent {
 		this.onSubmit = this.onSubmit.bind(this);
 	}
 
-	componentWillReceiveProps(newProps) {
+	componentWillReceiveProps(newProps, nextContent) {
 		if (newProps.errors) {
 			this.setState({ errors: newProps.errors });
 		}

@@ -14,9 +14,13 @@ class Profiles extends PureComponent {
 		const {profiles, loading} = this.props.profile;
 		let profileItems;
 
-		if (profiles === null || loading) {
+		if (loading || Object.keys(profiles).length === 0) {
 			profileItems = <Spinner/>;
-		} else {
+		}
+		else if (Object.keys(this.props.errors).length) {
+			profileItems = this.props.errors.response.data;
+		}
+		else {
 			if (profiles.length > 0) {
 				profileItems = profiles.map(profile => (
 						<ProfileItem profile={profile} key={profile._id}/>
@@ -50,11 +54,13 @@ class Profiles extends PureComponent {
 
 Profiles.propTypes = {
 	getProfiles: PropTypes.func.isRequired,
-	profile: PropTypes.object.isRequired
+	profile: PropTypes.object.isRequired,
+	errors: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-	profile: state.profile
+	profile: state.profile,
+	errors: state.errors
 });
 
 export default connect(mapStateToProps, {getProfiles})(Profiles);

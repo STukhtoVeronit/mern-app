@@ -15,9 +15,13 @@ class Posts extends PureComponent {
 		const {posts, loading} = this.props.post;
 		let postContent;
 
-		if (!Object.keys(posts).length || loading) {
+		if (loading) {
 			postContent = <Spinner/>
-		} else {
+		}
+		else if (Object.keys(this.props.errors).length) {
+			postContent = this.props.errors.response.data;
+		}
+		else if(Object.keys(posts).length){
 			postContent = <PostFeed posts={posts}/>
 		}
 		return (
@@ -41,11 +45,13 @@ class Posts extends PureComponent {
 
 Posts.propTypes = {
 	post: PropTypes.object.isRequired,
-	getPosts: PropTypes.func.isRequired
+	getPosts: PropTypes.func.isRequired,
+	errors: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-	post: state.post
+	post: state.post,
+	errors: state.errors
 });
 
 export default connect(mapStateToProps, {getPosts})(Posts);

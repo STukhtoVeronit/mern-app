@@ -13,12 +13,15 @@ import history from "../history";
 import {receiveErrorAction} from "../actions/errorAction";
 import {receiveProfile, receiveProfiles, setProfileLoading, unsetProfileLoading} from "../actions/profileActions";
 import {setCurrentUser} from "../actions/authActions";
+import {clearError} from "../actions/postActions";
+
 
 export function* watchGetProfileByHandle() {
 	yield takeLatest(GET_PROFILE_BY_USER_ID, callGetProfileByHandle);
 }
 function* callGetProfileByHandle(action) {
 	try {
+		yield put(clearError());
 		yield put(setProfileLoading());
 		const response = yield call(api.profile.getProfileByUserId, action.payload);
 		yield put(receiveProfile(response.data));
@@ -36,6 +39,7 @@ export function* watchGetCurrentProfile() {
 }
 function* callGetCurrentProfile(action) {
 	try {
+		yield put(clearError());
 		yield put(setProfileLoading());
 		const response = yield call(api.profile.getCurrentProfile);
 		yield put(receiveProfile(response.data));
@@ -52,8 +56,10 @@ function* callGetCurrentProfile(action) {
 export function* watchGetProfiles() {
 	yield takeLatest(GET_ALL_PROFILES, callGetProfiles);
 }
+
 function* callGetProfiles(action) {
 	try {
+		yield put(clearError());
 		yield put(setProfileLoading());
 		const response = yield call(api.profile.getProfiles);
 		yield put(receiveProfiles(response.data));
@@ -68,6 +74,7 @@ export function* watchDeleteCurrentUser() {
 }
 function* callDeleteCurrentUser(action) {
 	try {
+		yield put(clearError());
 		if (window.confirm('Are you sure about this?')) {
 			yield put(setProfileLoading());
 			yield call(api.profile.deleteAccount);
@@ -83,6 +90,7 @@ export function* watchCreateProfile() {
 }
 function* callCreateProfile(action) {
 	try {
+		yield put(clearError());
 		yield call(api.profile.createProfile, action.payload);
 		history.push('/dashboard');
 	} catch (error) {
@@ -95,6 +103,7 @@ export function* watchAddProfileExperience() {
 }
 function* callAddProfileExperience(action) {
 	try {
+		yield put(clearError());
 		yield call(api.profile.postExperience, action.payload);
 		history.push('/dashboard');
 	} catch (error) {
@@ -107,6 +116,7 @@ export function* watchDeleteProfileExperience() {
 }
 function* callDeleteProfileExperience(action) {
 	try {
+		yield put(clearError());
 		const response = yield call(api.profile.deleteExperience, action.payload);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
@@ -119,6 +129,7 @@ export function* watchAddProfileEducation() {
 }
 function* callAddProfileEducation(action) {
 	try {
+		yield put(clearError());
 		yield call(api.profile.postEducation, action.payload);
 		history.push('/dashboard');
 	} catch (error) {
@@ -131,6 +142,7 @@ export function* watchDeleteProfileEducation() {
 }
 function* callDeleteProfileEducation(action) {
 	try {
+		yield put(clearError());
 		const response = yield call(api.profile.deleteEducation, action.payload);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
