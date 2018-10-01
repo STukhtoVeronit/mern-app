@@ -58,6 +58,7 @@ function* callGetProfiles(action) {
 		const response = yield call(api.profile.getProfiles);
 		yield put(receiveProfiles(response.data));
 	} catch (error) {
+		yield put(unsetProfileLoading());
 		yield put(receiveErrorAction(error));
 	}
 }
