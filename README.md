@@ -5,9 +5,9 @@ Installing
 Deployment
  - `npm run dev` in `/mear-app` folder
  
-https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=node.js
- 
- https://en.wikipedia.org/?curid=26415635
- 
- Lesson about modal
- https://codeburst.io/modals-in-react-f6c3ff9f4701
+Task:
+1. Implement developer search
+2. Implement profile with current job status
+3. Implement Profile experience by skills that was using in job
+4. Create pages for feed and developers tabs
+5. Implement profile by link to user posts

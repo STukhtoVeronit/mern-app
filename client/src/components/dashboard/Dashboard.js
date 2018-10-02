@@ -23,7 +23,7 @@ class Dashboard extends PureComponent {
 
 		let dashboardContent;
 
-		if (Object.keys(profile).length === 0 || loading) {
+		if (profile === null || loading) {
 			dashboardContent = <Spinner/>;
 		} else {
 			//check if logged user has profile data

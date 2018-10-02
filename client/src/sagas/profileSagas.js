@@ -26,9 +26,6 @@ function* callGetProfileByHandle(action) {
 		const response = yield call(api.profile.getProfileByUserId, action.payload);
 		yield put(receiveProfile(response.data));
 	} catch (error) {
-		if (Math.floor(error.response.status/100) === 5){
-			history.push('/not-found');
-		}
 		yield put(unsetProfileLoading());
 		yield put(receiveErrorAction(error));
 	}

@@ -1,9 +1,11 @@
 import {
+	SET_WIKI_LOADING,
 	SET_WIKI_TERM
 } from '../actions/types';
 
 const initialState = {
-	wiki: {}
+	wiki: {},
+	loading: false
 };
 
 export default function (state = initialState, action) {
@@ -13,7 +15,13 @@ export default function (state = initialState, action) {
 		case SET_WIKI_TERM:
 			return {
 				...state,
-				wiki: action.payload
+				wiki: action.payload,
+				loading: false
+			};
+		case SET_WIKI_LOADING:
+			return {
+				...state,
+				loading: true
 			};
 
 		default:

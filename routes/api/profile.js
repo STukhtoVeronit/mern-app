@@ -312,7 +312,7 @@ router.delete(
 router.get('/wiki/:term', (req, res) => {
 	const errors = {};
 
-	request(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=${req.params.term}`, { json: true }, (err, response, body) => {
+	request(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=${req.params.term}&&programming`, { json: true }, (err, response, body) => {
 		if (err) { return res.status(504).json({err}); }
 		res.json(response);
 	});

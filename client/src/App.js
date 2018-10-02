@@ -80,6 +80,7 @@ class App extends Component {
 					</Switch>
 
 					<Footer/>
+					<div id="modal-root"/>
 				</div>
 		);
 	}

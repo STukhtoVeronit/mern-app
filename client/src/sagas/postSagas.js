@@ -1,4 +1,4 @@
-import {call, put,fork, takeLatest} from "redux-saga/effects";
+import {call, put, fork, takeLatest} from "redux-saga/effects";
 import {
 	ADD_COMMENT, ADD_LIKE,
 	DELETE_COMMENT,
@@ -15,6 +15,7 @@ import {
 export function* watchPostNewPost() {
 	yield takeLatest(POST_NEW_POST, callPostNewPost);
 }
+
 function* callPostNewPost(action) {
 	try {
 		yield put(clearError());
@@ -30,6 +31,7 @@ function* callPostNewPost(action) {
 export function* watchFetchPosts() {
 	yield takeLatest(FETCH_POSTS, callFetchPosts);
 }
+
 function* callFetchPosts() {
 	try {
 		yield put(clearError());
@@ -45,6 +47,7 @@ function* callFetchPosts() {
 export function* watchFetchPost() {
 	yield takeLatest(FETCH_POST, callFetchPost);
 }
+
 function* callFetchPost(action) {
 	try {
 		yield put(clearError());
@@ -60,6 +63,7 @@ function* callFetchPost(action) {
 export function* watchDeletePostByID() {
 	yield takeLatest(DELETE_POST_BY_ID, callDeletePostByID);
 }
+
 function* callDeletePostByID(action) {
 	try {
 		yield put(clearError());
@@ -74,6 +78,7 @@ function* callDeletePostByID(action) {
 export function* watchDeleteComment() {
 	yield takeLatest(DELETE_COMMENT, callDeleteComment);
 }
+
 function* callDeleteComment(action) {
 	try {
 		yield put(clearError());
@@ -88,6 +93,7 @@ function* callDeleteComment(action) {
 export function* watchAddComment() {
 	yield takeLatest(ADD_COMMENT, callAddComment);
 }
+
 function* callAddComment(action) {
 	try {
 		yield put(clearError());
@@ -102,6 +108,7 @@ function* callAddComment(action) {
 export function* watchAddLike() {
 	yield takeLatest(ADD_LIKE, callAddLike);
 }
+
 function* callAddLike(action) {
 	try {
 		yield put(clearError());

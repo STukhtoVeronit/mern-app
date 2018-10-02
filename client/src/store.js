@@ -29,12 +29,12 @@ if (process.env.NODE_ENV === `development`) {
 	middlewares.push(logger);
 }
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
 		persistedReducer, // reducers
 		initialState, // our state
-		composeEnhancers(applyMiddleware(...middlewares))
+		compose(applyMiddleware(...middlewares))
 );
 
 export const persistor = persistStore(store);

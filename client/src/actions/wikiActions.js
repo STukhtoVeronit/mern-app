@@ -1,5 +1,5 @@
 import {
-	FETCH_WIKI_TERM,
+	FETCH_WIKI_TERM, SET_WIKI_LOADING,
 	SET_WIKI_TERM
 } from "./types";
 
@@ -13,4 +13,7 @@ export const getWikiTerm = term => ({
 export const receiveWikiTerm = res => ({
 	type: SET_WIKI_TERM,
 	payload: res
+});
+export const setWikiLoading = () => ({
+	type: SET_WIKI_LOADING,
 });

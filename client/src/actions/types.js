@@ -42,4 +42,5 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 export const FETCH_WIKI_TERM = 'FETCH_WIKI_TERM';
 export const SET_WIKI_TERM = 'SET_WIKI_TERM';
+export const SET_WIKI_LOADING = 'SET_WIKI_LOADING';
 
