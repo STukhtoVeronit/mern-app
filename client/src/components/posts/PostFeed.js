@@ -4,13 +4,13 @@ import PostItem from './PostItem';
 
 class PostFeed extends Component {
 	render() {
-		const {posts} = this.props;
+		const posts = this.props.posts.docs;
 		return posts.map(post => <PostItem key={post._id} post={post}/>);
 	}
 }
 
 PostFeed.propTypes = {
-	posts: PropTypes.array.isRequired
+	posts: PropTypes.object.isRequired,
 };
 
 export default PostFeed;

@@ -9,10 +9,10 @@ function postNewPost(data) {
 	});
 }
 
-function getPosts() {
+function getPosts(perPage, page) {
 	return new Promise((resolve, reject) => {
 		axios
-				.get('/api/posts')
+				.get(`/api/posts/${perPage}/${page}`)
 				.then(res => resolve(res))
 				.catch(err => reject(err))
 	});

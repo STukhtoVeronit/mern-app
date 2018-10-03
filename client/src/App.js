@@ -30,6 +30,9 @@ class App extends Component {
 		this.props.checkJwtToken();
 		// this.props.clearError();
 	}
+	componentWillMount(){
+		this.props.checkJwtToken();
+	}
 
 	render() {
 		return (

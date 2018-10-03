@@ -1,6 +1,5 @@
-
 import {
-	ADD_POST,
+	// ADD_POST,
 	POST_LOADING,
 	GET_POSTS,
 	GET_POST,
@@ -16,18 +15,19 @@ import {
 	POST_LOADING_OFF
 } from './types';
 
-export const addPost = post => ({
+export const addPost = (post, perPage, page) => ({
 	type: POST_NEW_POST,
-	payload: post
+	payload: {post, perPage, page}
 });
+//receiveAddPost action is deprecated because pagination
+// export const receiveAddPost = post => ({
+// 	type: ADD_POST,
+// 	payload: post
+// });
 
-export const receiveAddPost = post => ({
-	type: ADD_POST,
-	payload: post
-});
-
-export const getPosts = () => ({
-	type: FETCH_POSTS
+export const getPosts = (perPage = 10, page = 1) => ({
+	type: FETCH_POSTS,
+	payload: {perPage, page}
 });
 
 export const receivePosts = posts => ({
@@ -45,9 +45,9 @@ export const receivePost = post => ({
 	payload: post
 });
 
-export const deletePost = id => ({
+export const deletePost = (id, perPage, page) => ({
 	type: DELETE_POST_BY_ID,
-	payload: id
+	payload: {id, perPage, page}
 });
 
 export const receiveDeletePost = id => ({
@@ -57,7 +57,7 @@ export const receiveDeletePost = id => ({
 
 export const deleteComment = (postId, commentId) => ({
 	type: DELETE_COMMENT,
-	payload: {postId,commentId}
+	payload: {postId, commentId}
 });
 
 export const addComment = (postId, commentData) => ({
@@ -66,9 +66,9 @@ export const addComment = (postId, commentData) => ({
 });
 
 
-export const addLike = id => ({
+export const addLike = (id, perPage, page) => ({
 	type: ADD_LIKE,
-	payload: id
+	payload: {id, perPage, page}
 });
 
 export const setPostLoading = () => ({

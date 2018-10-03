@@ -1,19 +1,21 @@
-import {ADD_POST, DELETE_POST, GET_POSTS, POST_LOADING, GET_POST, POST_LOADING_OFF} from "../actions/types";
+import { DELETE_POST, GET_POSTS, POST_LOADING, GET_POST, POST_LOADING_OFF} from "../actions/types";
 
 const initialState = {
 	posts: [],
 	post: {},
-	loading: false
+	loading: false,
+	page:1,
+	pages:1,
 };
 
 export default function (state = initialState, action) {
 	switch (action.type) {
-		case ADD_POST:
-			return {
-				...state,
-				posts: [action.payload, ...state.posts],
-				loading: false
-			};
+		// case ADD_POST:
+		// 	return {
+		// 		...state,
+		// 		posts: [action.payload, ...state.posts],
+		// 		loading: false
+		// 	};
 		case DELETE_POST:
 			return {
 				...state,

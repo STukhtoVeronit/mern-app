@@ -14,12 +14,15 @@ const Profile = require('../../models/Profile');
 // @route   GET api/posts
 // @desc    Get all posts
 // @access  Public
-router.get('/', (req, res) => {
-	Post.find()
-		.sort({date: -1})
+router.get('/:perPage/:page', (req, res) => {
+	var options = {
+		sort:     { date: -1 },
+		page:   req.params.page,
+		limit:    Math.min(req.params.perPage, 100)
+	};
+	Post.paginate({}, options)
 		.then(posts => res.json(posts))
 		.catch(err => res.status(404).json({nopePost: "nope posts found"}));
-
 });
 
 // @route   GET api/posts/:id

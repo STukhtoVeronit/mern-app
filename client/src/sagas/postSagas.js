@@ -9,7 +9,7 @@ import {
 import api from "../api/postApi";
 import {receiveErrorAction} from "../actions/errorAction";
 import {
-	clearError, deletePostLoading, receiveAddPost, receiveDeletePost, receivePost, receivePosts, setPostLoading
+	clearError, deletePostLoading, getPosts, receiveDeletePost, receivePost, receivePosts, setPostLoading
 } from "../actions/postActions";
 
 export function* watchPostNewPost() {
@@ -20,8 +20,8 @@ function* callPostNewPost(action) {
 	try {
 		yield put(clearError());
 		yield put(setPostLoading());
-		const response = yield call(api.post.postNewPost, action.payload);
-		yield put(receiveAddPost(response.data));
+		yield call(api.post.postNewPost, action.payload.post);
+		yield put(getPosts(action.payload.perPage, action.payload.page));
 	} catch (error) {
 		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
@@ -32,11 +32,11 @@ export function* watchFetchPosts() {
 	yield takeLatest(FETCH_POSTS, callFetchPosts);
 }
 
-function* callFetchPosts() {
+function* callFetchPosts(action) {
 	try {
 		yield put(clearError());
 		yield put(setPostLoading());
-		const response = yield call(api.post.getPosts);
+		const response = yield call(api.post.getPosts, action.payload.perPage, action.payload.page);
 		yield put(receivePosts(response.data));
 	} catch (error) {
 		yield put(deletePostLoading());
@@ -67,8 +67,9 @@ export function* watchDeletePostByID() {
 function* callDeletePostByID(action) {
 	try {
 		yield put(clearError());
-		yield call(api.post.deletePosts, action.payload);
-		yield put(receiveDeletePost(action.payload));
+		yield call(api.post.deletePosts, action.payload.id);
+		yield put(getPosts(action.payload.perPage, action.payload.page));
+		// yield put(receiveDeletePost(action.payload));
 	} catch (error) {
 		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));
@@ -108,12 +109,13 @@ function* callAddComment(action) {
 export function* watchAddLike() {
 	yield takeLatest(ADD_LIKE, callAddLike);
 }
-
+//TODO: Ask how use fork
 function* callAddLike(action) {
 	try {
 		yield put(clearError());
-		yield call(api.post.postPostLike, action.payload);
-		yield fork(callFetchPosts);
+		yield call(api.post.postPostLike, action.payload.id);
+		// yield fork(callFetchPosts);
+		yield put(getPosts(action.payload.perPage, action.payload.page));
 	} catch (error) {
 		yield put(deletePostLoading());
 		yield put(receiveErrorAction(error));

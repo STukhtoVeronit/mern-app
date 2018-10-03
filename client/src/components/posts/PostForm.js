@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
-import { addPost } from '../../actions/postActions';
+import {addPost} from '../../actions/postActions';
 
 class PostForm extends PureComponent {
 	constructor(props) {
@@ -18,14 +18,14 @@ class PostForm extends PureComponent {
 
 	componentWillReceiveProps(newProps, nextContent) {
 		if (newProps.errors) {
-			this.setState({ errors: newProps.errors });
+			this.setState({errors: newProps.errors});
 		}
 	}
 
 	onSubmit(e) {
 		e.preventDefault();
 
-		const { user } = this.props.auth;
+		const {user} = this.props.auth;
 
 		const newPost = {
 			text: this.state.text,
@@ -33,17 +33,17 @@ class PostForm extends PureComponent {
 			avatar: user.avatar
 		};
 
-		this.props.addPost(newPost);
-		this.setState({ text: '' });
+		this.props.addPost(newPost, this.props.post.posts.limit, this.props.post.posts.page);
+		this.setState({text: ''});
 	}
 
 	onChange(e) {
-		this.setState({ [e.target.name]: e.target.value });
+		this.setState({[e.target.name]: e.target.value});
 	}
 
 	render() {
-		const { errors } = this.state;
-
+		const {errors} = this.state;
+		//TODO check error handling
 		return (
 				<div className="post-form mb-3">
 					<div className="card card-info">
@@ -73,12 +73,14 @@ class PostForm extends PureComponent {
 PostForm.propTypes = {
 	addPost: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired
+	errors: PropTypes.object.isRequired,
+	post: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
 	auth: state.auth,
+	post: state.post,
 	errors: state.errors
 });
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(mapStateToProps, {addPost})(PostForm);

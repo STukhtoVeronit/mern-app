@@ -8,11 +8,11 @@ import {deletePost, addLike} from '../../actions/postActions';
 
 class PostItem extends PureComponent {
 	onDeleteClick(id) {
-		this.props.deletePost(id);
+		this.props.deletePost(id, this.props.posts.posts.limit, this.props.posts.posts.page);
 	}
 
 	onLikeClick(id) {
-		this.props.addLike(id);
+		this.props.addLike(id, this.props.posts.posts.limit, this.props.posts.posts.page);
 	}
 
 	findUserLike(likes) {
@@ -22,6 +22,7 @@ class PostItem extends PureComponent {
 
 
 	render() {
+		console.log();
 		const {post, auth, showActions} = this.props;
 
 		return (
@@ -78,13 +79,15 @@ PostItem.defaultProps = {
 
 PostItem.propType = {
 	post: PropTypes.object.isRequired,
+	posts: PropTypes.object.isRequired,
 	auth: PropTypes.object.isRequired,
 	deletePost: PropTypes.func.isRequired,
-	addLike: PropTypes.func.isRequired
+	addLike: PropTypes.func.isRequired,
 };
 
 const MapStateToProps = state => ({
-	auth: state.auth
+	auth: state.auth,
+	posts: state.post,
 });
 
 export default connect(MapStateToProps, {deletePost, addLike})(PostItem);

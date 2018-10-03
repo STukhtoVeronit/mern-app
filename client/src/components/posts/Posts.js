@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import ReactPaginate from 'react-paginate';
 import PostForm from './PostForm';
 import Spinner from '../common/Spinner';
 import {getPosts} from "../../actions/postActions";
@@ -8,21 +9,49 @@ import PostFeed from "./PostFeed";
 
 class Posts extends PureComponent {
 	componentDidMount() {
-		this.props.getPosts();
+		this.props.getPosts(10, 1);//perPage, page
 	}
+
+	handlePageClick = (data) => {
+		// let offset = Math.ceil(data.selected * this.props.perPage);
+		console.log(data);
+		this.props.getPosts(10, data.selected + 1);
+	};
 
 	render() {
 		const {posts, loading} = this.props.post;
-		let postContent;
+		let postsContent;
+		let postsPagination;
 
 		if (loading) {
-			postContent = <Spinner/>
+			postsContent = <Spinner/>
 		}
 		else if (Object.keys(this.props.errors).length) {
-			postContent = this.props.errors.response.data;
+			postsContent = this.props.errors.response.data;
 		}
-		else if(Object.keys(posts).length){
-			postContent = <PostFeed posts={posts}/>
+		else if (Object.keys(posts).length) {
+			postsContent = (<PostFeed posts={posts}/>);
+			postsPagination = (<ReactPaginate pageCount={posts.pages}
+																				marginPagesDisplayed={2}
+																				initialPage={parseInt(posts.page, 10) - 1}
+																				onPageChange={this.handlePageClick}
+																				disableInitialCallback={true}
+																				pageRangeDisplayed={6}
+																				containerClassName={"pagination"}
+																				subContainerClassName={"pages pagination"}
+																				activeClassName={"active"}/>);
+
+			//	 <ReactPaginate previousLabel={"previous"}
+			//                        nextLabel={"next"}
+			//                        breakLabel={<a href="">...</a>}
+			//                        breakClassName={"break-me"}
+			//                        pageCount={this.state.pageCount}
+			//                        marginPagesDisplayed={2}
+			//                        pageRangeDisplayed={5}
+			//                        onPageChange={this.handlePageClick}
+			//                        containerClassName={"pagination"}
+			//                        subContainerClassName={"pages pagination"}
+			//                        activeClassName={"active"} />
 		}
 		return (
 				<main>
@@ -32,7 +61,8 @@ class Posts extends PureComponent {
 								<div className="row">
 									<div className="col-md-12">
 										<PostForm/>
-										{postContent}
+										{postsContent}
+										{postsPagination}
 									</div>
 								</div>
 							</div>

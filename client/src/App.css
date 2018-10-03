@@ -58,7 +58,6 @@ img {
 }
 .wiki_block .list-group-item:hover{
     background-color: rgba(100,100,100,0.1);
-
 }
 
 #modal-root {
@@ -80,4 +79,28 @@ img {
 .modal .searchmatch{
     font-size: 1.1em;
     background-color: rgba(0,0,0,0.1);
+}
+.pagination{
+    color: #17a2b8;
+    justify-content: center;
+    text-decoration: none;
+}
+.pagination li{
+    margin-right: 10px;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.pagination li a{
+    color: gray;
+}
+.pagination li a:hover{
+    text-decoration: none;
+    color: inherit;
+}
+.pagination li:hover{
+    background-color: #f8f9fa;
+}
+.pagination li.active{
+    border: 1px solid #17a2b8;
 }

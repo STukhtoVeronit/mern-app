@@ -43,8 +43,6 @@ class CommentForm extends PureComponent {
 	}
 
 	render() {
-		const { errors } = this.state;
-
 		return (
 				<div className="post-form mb-3">
 					<div className="card card-info">
@@ -59,7 +57,7 @@ class CommentForm extends PureComponent {
 											name="text"
 											value={this.state.text}
 											onChange={this.onChange}
-											error={errors.text}
+											error={(Object.keys(this.state.errors).length)? this.state.errors.response.data.text : null}
 									/>
 								</div>
 								<button type="submit" className="btn btn-dark">
