@@ -7,8 +7,6 @@ import {getPost} from "../../actions/postActions";
 import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
-import isEmpty from "../../validation/is-empty";
-
 
 class Post extends PureComponent {
 	componentDidMount() {
@@ -20,7 +18,7 @@ class Post extends PureComponent {
 		let postContent;
 		if (loading) {
 			postContent = <Spinner/>
-		} else {
+		} else if(post) {
 			postContent = (
 					<div>
 						<PostItem post={post} showActions={false}/>

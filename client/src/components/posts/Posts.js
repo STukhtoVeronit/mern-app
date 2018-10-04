@@ -7,7 +7,6 @@ import Spinner from '../common/Spinner';
 import {getPosts} from "../../actions/postActions";
 import PostFeed from "./PostFeed";
 import isEmpty from "../../validation/is-empty";
-import history from "../../history";
 
 class Posts extends PureComponent {
 	componentDidMount() {

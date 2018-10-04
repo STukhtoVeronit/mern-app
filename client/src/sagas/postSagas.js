@@ -1,4 +1,4 @@
-import {call, put, fork, takeLatest} from "redux-saga/effects";
+import {call, put, /*fork,*/ takeLatest} from "redux-saga/effects";
 import {
 	ADD_COMMENT, ADD_LIKE,
 	DELETE_COMMENT,
@@ -9,7 +9,7 @@ import {
 import api from "../api/postApi";
 import {receiveErrorAction} from "../actions/errorAction";
 import {
-	clearError, deletePostLoading, getPosts, receiveDeletePost, receivePost, receivePosts, setPostLoading
+	clearError, deletePostLoading, getPosts, /*receiveDeletePost,*/ receivePost, receivePosts, setPostLoading
 } from "../actions/postActions";
 
 export function* watchPostNewPost() {
