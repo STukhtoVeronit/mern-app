@@ -32,7 +32,7 @@ class Posts extends PureComponent {
 			// history.push('/not-found');
 			postsContent = this.props.errors.response.statusText + ": server has hard day T-T, please try again";
 		}
-		else if (!isEmpty(posts.docs)) {
+		else /*if (!isEmpty(posts.docs))*/ {
 			postsContent = (<PostFeed posts={posts}/>);
 			postsPagination = (<ReactPaginate pageCount={posts.pages}
 																				marginPagesDisplayed={2}
