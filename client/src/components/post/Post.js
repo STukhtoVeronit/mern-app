@@ -18,7 +18,7 @@ class Post extends PureComponent {
 	render() {
 		const {post, loading} = this.props.post;
 		let postContent;
-		if (loading || isEmpty(post)) {
+		if (loading) {
 			postContent = <Spinner/>
 		} else {
 			postContent = (
