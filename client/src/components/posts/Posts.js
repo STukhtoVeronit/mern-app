@@ -26,9 +26,9 @@ class Posts extends PureComponent {
 		if (loading) {
 			postsContent = <Spinner/>
 		}
-		else if (Object.keys(this.props.errors).length) {
-			postsContent = this.props.errors.response.data;
-		}
+		// else if (Object.keys(this.props.errors).length) {
+		// 	postsContent = /*this.props.errors.response.data.text*/ "There is some error, please try again.";
+		// }
 		else if (Object.keys(posts).length) {
 			postsContent = (<PostFeed posts={posts}/>);
 			postsPagination = (<ReactPaginate pageCount={posts.pages}

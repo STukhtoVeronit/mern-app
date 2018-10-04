@@ -9,7 +9,7 @@ class PostForm extends PureComponent {
 		super(props);
 		this.state = {
 			text: '',
-			errors: {}
+			errors: ''
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -17,8 +17,8 @@ class PostForm extends PureComponent {
 	}
 
 	componentWillReceiveProps(newProps, nextContent) {
-		if (newProps.errors) {
-			this.setState({errors: newProps.errors});
+		if (Object.keys(newProps.errors).length) {
+			this.setState({errors: newProps.errors.response.data.text});
 		}
 	}
 
@@ -42,8 +42,7 @@ class PostForm extends PureComponent {
 	}
 
 	render() {
-		const {errors} = this.state;
-		//TODO check error handling
+		console.dir(this.state.errors);
 		return (
 				<div className="post-form mb-3">
 					<div className="card card-info">
@@ -56,7 +55,7 @@ class PostForm extends PureComponent {
 											name="text"
 											value={this.state.text}
 											onChange={this.onChange}
-											error={errors.text}
+											error={this.state.errors}
 									/>
 								</div>
 								<button type="submit" className="btn btn-dark">
