@@ -6,6 +6,8 @@ import PostForm from './PostForm';
 import Spinner from '../common/Spinner';
 import {getPosts} from "../../actions/postActions";
 import PostFeed from "./PostFeed";
+import isEmpty from "../../validation/is-empty";
+import history from "../../history";
 
 class Posts extends PureComponent {
 	componentDidMount() {
@@ -26,7 +28,11 @@ class Posts extends PureComponent {
 		if (loading) {
 			postsContent = <Spinner/>
 		}
-		else if (Object.keys(posts.docs).length /*&& !Object.keys(this.props.errors).length*/) {
+		else if (!isEmpty(this.props.errors) && this.props.errors.response.status === 500) {
+			// history.push('/not-found');
+			postsContent = this.props.errors.response.statusText + ": server has hard day T-T, please try again";
+		}
+		else if (!isEmpty(posts.docs)) {
 			postsContent = (<PostFeed posts={posts}/>);
 			postsPagination = (<ReactPaginate pageCount={posts.pages}
 																				marginPagesDisplayed={2}

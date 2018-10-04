@@ -40,7 +40,7 @@ function* callFetchPosts(action) {
 		yield put(receivePosts(response.data));
 	} catch (error) {
 		yield put(deletePostLoading());
-		yield put(receivePosts({}));
+		yield put(receiveErrorAction(error));
 	}
 }
 
@@ -56,7 +56,7 @@ function* callFetchPost(action) {
 		yield put(receivePost(response.data));
 	} catch (error) {
 		yield put(deletePostLoading());
-		yield put(receivePost({}));
+		yield put(receiveErrorAction(error));
 	}
 }
 

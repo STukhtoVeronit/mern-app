@@ -47,7 +47,7 @@ class App extends Component {
 							<Route exact path="/login" component={Login}/>
 							<Route exact path="/profiles" component={Profiles}/>
 							<Route exact path="/profile/:user_id" component={Profile}/>
-							<Route exact path="/not-found" component={NotFound}/>
+							{/*<Route exact path="/not-found" component={NotFound}/>*/}
 
 							<PrivateRoute
 									exact path="/dashboard"

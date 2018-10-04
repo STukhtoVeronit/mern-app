@@ -42,7 +42,6 @@ class PostForm extends PureComponent {
 	}
 
 	render() {
-		console.dir(this.state.errors);
 		return (
 				<div className="post-form mb-3">
 					<div className="card card-info">
