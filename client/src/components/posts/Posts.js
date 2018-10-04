@@ -26,7 +26,7 @@ class Posts extends PureComponent {
 		if (loading) {
 			postsContent = <Spinner/>
 		}
-		else if (Object.keys(posts).length /*&& !Object.keys(this.props.errors).length*/) {
+		else if (Object.keys(posts.docs).length /*&& !Object.keys(this.props.errors).length*/) {
 			postsContent = (<PostFeed posts={posts}/>);
 			postsPagination = (<ReactPaginate pageCount={posts.pages}
 																				marginPagesDisplayed={2}
