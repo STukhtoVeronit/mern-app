@@ -95,14 +95,12 @@ class Register extends PureComponent {
 											error={errors.email}
 											info="This site uses Gravatar by default."
 										/>
-
 										{/*<InputFile*/}
 											{/*type="file"*/}
 											{/*onChange={this.onInputFileSelected}*/}
 											{/*name="avatarImg"*/}
 											{/*error={errors.avatar}*/}
 										{/*/>*/}
-
 										<TextFieldGroup
 											type="password"
 											onChange={this.onChange}
