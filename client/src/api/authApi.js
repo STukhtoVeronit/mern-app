@@ -1,6 +1,7 @@
 import axios from 'axios';
 //TODO: redo export using one object 'auth'
 export function postUserRegister(uuid) {
+	console.dir(uuid);
 	return new Promise((resolve, reject) => {
 		axios
 				.post('/api/users/register', uuid)
