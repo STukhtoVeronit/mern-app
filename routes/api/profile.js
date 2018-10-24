@@ -126,7 +126,8 @@ router.post('/',
 		if (req.body.website) {
 
 			profileFields.website = req.body.website
-		};
+		}
+		;
 		if (req.body.location) profileFields.location = req.body.location;
 		if (req.body.bio) profileFields.bio = req.body.bio;
 		if (req.body.status) profileFields.status = req.body.status;
@@ -152,7 +153,7 @@ router.post('/',
 					{user: req.user.id},
 					{$set: profileFields},
 					{new: true}
-					)
+				)
 					.populate('user', ['name', 'avatar'])
 					.then(profile => res.json(profile));
 			} else {
@@ -304,16 +305,16 @@ router.delete(
 );
 
 
-
-
 // @route   get api/profile/wiki/term
 // @desc    get profile by user
 // @access  Public
 router.get('/wiki/:term', (req, res) => {
 	const errors = {};
 
-	request(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=${req.params.term}&&programming`, { json: true }, (err, response, body) => {
-		if (err) { return res.status(504).json({err}); }
+	request(`https://en.wikipedia.org/w/api.php?action=query&list=search&srlimit=1&utf8=&format=json&srprop=snippet&srsearch=${req.params.term}`, {json: true}, (err, response, body) => {
+		if (err) {
+			return res.status(504).json({err});
+		}
 		res.json(response);
 	});
 });

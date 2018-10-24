@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {loginUser} from "../../actions/authActions";
 import TextFieldGroup from '../common/TextFieldGroup';
 import history from '../../history';
+import isEmpty from "../../validation/is-empty";
 
 
 class Login extends PureComponent {
@@ -28,8 +29,8 @@ class Login extends PureComponent {
 		if (nextProps.auth.isAuthenticated) {
 			history.push('/dashboard');
 		}
-		if (nextProps.errors) {
-			this.setState({errors: nextProps.errors});
+		if (!isEmpty(nextProps.errors)) {
+			this.setState({errors: nextProps.errors.response.data});
 		}
 		if (nextProps.auth.user.email) {
 			//TODO: if user have just register insert its email
@@ -52,6 +53,7 @@ class Login extends PureComponent {
 
 	render() {
 		const {errors} = this.state;
+
 		return (
 				<main>
 					<div className="container">

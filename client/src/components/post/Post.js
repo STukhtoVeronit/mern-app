@@ -7,6 +7,7 @@ import {getPost} from "../../actions/postActions";
 import PostItem from '../posts/PostItem';
 import CommentForm from './CommentForm';
 import CommentFeed from './CommentFeed';
+import isEmpty from "../../validation/is-empty";
 
 class Post extends PureComponent {
 	componentDidMount() {
@@ -16,9 +17,11 @@ class Post extends PureComponent {
 	render() {
 		const {post, loading} = this.props.post;
 		let postContent;
-		if (loading) {
+		if (loading)  {
 			postContent = <Spinner/>
-		} else if(post) {
+		} else if(isEmpty(post)){
+			postContent = <Spinner/>
+		}else {
 			postContent = (
 					<div>
 						<PostItem post={post} showActions={false}/>

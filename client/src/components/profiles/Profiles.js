@@ -4,20 +4,24 @@ import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 import ProfileItem from './ProfileItem';
 import {getProfiles} from "../../actions/profileActions";
+import isEmpty from "../../validation/is-empty";
 
 class Profiles extends PureComponent {
+
 	componentDidMount() {
 		this.props.getProfiles();
 	}
 
 	render() {
+		console.log(this.props.profile.profiles);
+
 		const {profiles, loading} = this.props.profile;
 		let profileItems;
 
-		if (loading || Object.keys(profiles).length === 0) {
+		if (loading || isEmpty(profiles)) {
 			profileItems = <Spinner/>;
 		}
-		else if (Object.keys(this.props.errors).length) {
+		else if (!isEmpty(this.props.errors)) {
 			profileItems = this.props.errors.response.data;
 		}
 		else {

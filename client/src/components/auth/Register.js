@@ -14,6 +14,7 @@ class Register extends PureComponent {
 			email: '',
 			password: '',
 			password2: '',
+			avatarImg: '',
 			errors: {}
 		};
 		this.onChange = this.onChange.bind(this);

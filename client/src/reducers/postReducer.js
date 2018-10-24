@@ -3,7 +3,7 @@ import { DELETE_POST, GET_POSTS, POST_LOADING, GET_POST, POST_LOADING_OFF} from 
 const initialState = {
 	posts: [],
 	post: {},
-	loading: false,
+	loading: true,
 	page:1,
 	pages:1,
 };
