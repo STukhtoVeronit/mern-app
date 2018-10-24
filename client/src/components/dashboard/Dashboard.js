@@ -7,6 +7,7 @@ import Spinner from '../common/Spinner';
 import ProfileActions from './ProfileActions';
 import Education from './Education';
 import Experience from './Experience';
+import isEmpty from "../../validation/is-empty";
 
 class Dashboard extends PureComponent {
 	componentDidMount() {
@@ -23,11 +24,11 @@ class Dashboard extends PureComponent {
 
 		let dashboardContent;
 
-		if (profile === null || loading) {
+		if (loading) {
 			dashboardContent = <Spinner/>;
 		} else {
 			//check if logged user has profile data
-			if (Object.keys(profile).length > 0) {
+			if (!isEmpty(profile)) {
 				dashboardContent = (
 						<div>
 							<p className="lead text-muted">Welcome <Link to={`/profile/${profile.user._id}`}> {user.name} </Link></p>

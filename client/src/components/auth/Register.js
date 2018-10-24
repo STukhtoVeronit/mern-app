@@ -15,8 +15,6 @@ class Register extends PureComponent {
 			email: '',
 			password: '',
 			password2: '',
-			avatarImg: {},
-			avatarImgId: null,
 			errors: {}
 		};
 		this.onChange = this.onChange.bind(this);
@@ -52,17 +50,13 @@ class Register extends PureComponent {
 	onSubmit(e) {
 		e.preventDefault();
 
-		// this.props.uploadImage();
-
 		const newUser = {
 			name: this.state.name,
 			email: this.state.email,
 			password: this.state.password,
 			password2: this.state.password2,
-			// avatarImg: this.state.avatarImg
 		};
 
-		// console.log(newUser);
 		this.props.registerUser(newUser);
 
 	}

@@ -39,7 +39,6 @@ export function* watchPushRegisterUser() {
 function* callPushRegisterUser(action) {
 	try {
 		const userData = action.payload;
-		console.log(userData);
 		const response = yield call(postUserRegister, userData);
 		yield put(receiveRegisterUser({email: response.data.email}));
 		history.push('/login');
